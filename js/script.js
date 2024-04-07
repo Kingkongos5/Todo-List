@@ -14,7 +14,7 @@ addList.addEventListener('click', function () {
       'beforeend',
       `<article id="${id}" class="list" style="top: 0px; left: 0px">` +
       '<div class="h1">' +
-      `<input id="${id}text" value="Name" class="list__title"></input>` +
+      `<input type="tel" id="${id}text" value="Name" class="list__title"></input>` +
       `<div data-id="${id}" class="list__title-image new">` +
       `<div data-id="${id}" class="list__title-image-bg">` +
       `</div>` +
