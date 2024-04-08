@@ -198,7 +198,6 @@ body {
   position: absolute;
   width: 250px;
   max-height: 100%;
-  min-height: 250px;
   background: #fff;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 15px;
@@ -210,9 +209,12 @@ body {
 }
 
 .h1 {
-  padding-bottom: 5px;
+  display: flex;
   border-bottom: 3px solid #eee;
   position: relative;
+  height: 100%;
+  z-index: -1;
+  -webkit-user-drag: none;
 }
 
 .list {
@@ -606,44 +608,50 @@ body {
 .list.removeTwo:nth-child(60) {
   transition: all 0.9s ease 6s;
 }
+.list__addNewElement {
+  width: 22px;
+  height: 22px;
+  margin-top: 10px;
+  display: flex;
+  align-self: end;
+  align-items: center;
+  justify-content: center;
+  background: green;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.list__addNewElement span {
+  width: 12px;
+  height: 12px;
+  background: url(../img/plus.svg) 0 0/100% no-repeat;
+}
 .list__title {
-  user-select: none;
+  position: relative;
+  z-index: -1;
+  width: 100%;
+  min-height: 25px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: clamp( 0.875rem , 0.7674262735rem  +  0.5361930295vw , 1.25rem );
   background: transparent;
-  width: 100%;
-  height: 45px;
   resize: none;
-  position: relative;
-  z-index: -1;
   pointer-events: none;
-  user-select: none;
   transition: all 0.6s ease 0s;
   text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
-}
-.list__title.focus {
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9);
-  padding-right: 2.25rem;
-}
-.list__title[value] {
-  position: relative;
-  z-index: 1;
-  pointer-events: none;
-  user-select: none;
+  font-size: 18px;
 }
 .list__title-image {
-  position: absolute;
+  position: relative;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   width: 36px;
   height: 36px;
   border-radius: 50%;
   right: 0;
-  top: 50%;
+  top: 18px;
   z-index: 10;
   transform: translate(0%, -50%);
   border: 1px solid #000;
@@ -691,10 +699,31 @@ body {
   background: url(../img/mark.svg) 0 0/100% no-repeat;
 }
 .list__hero {
+  padding-top: 10px;
   flex: 0 1 100%;
-  min-height: 11.125rem;
+}
+.list__item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 3px solid #999;
+  padding-bottom: 2px;
+  padding-top: 6px;
+}
+.list__check {
+  font-size: 14px;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+  width: 80%;
+}
+.list__check-input {
+  margin-top: 2px;
+  align-self: start;
+  background: transparent;
 }
 .list__button-menu {
+  padding-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -779,4 +808,76 @@ body {
 .del:not(:hover) {
   transition: all 0.6s ease 0s;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+}
+
+textarea {
+  position: relative;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.list__title-edit {
+  position: relative;
+  display: flex;
+  align-self: start;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  right: 0;
+  top: 18px;
+  z-index: 10;
+  transform: translate(0%, -50%);
+  cursor: pointer;
+}
+.list__title-edit.edit .list__title-edit-bg:after {
+  transition: all 0.3s ease 0s;
+  top: 50%;
+  opacity: 1;
+  display: inline-block;
+}
+.list__title-edit.edit .list__title-edit-bg::before {
+  transition: all 0.3s ease 0s;
+  top: 100%;
+  opacity: 0;
+  display: inline-block;
+}
+.list__title-edit-bg {
+  position: relative;
+  width: 13px;
+  height: 13px;
+}
+.list__title-edit-bg:before {
+  transition: all 0.3s ease 0s;
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: url(../img/Edit.svg) 0 0/100% no-repeat;
+}
+.list__title-edit-bg::after {
+  transition: all 0.3s ease 0s;
+  display: inline-block;
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 50%;
+  top: 0;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  background: url(../img/mark.svg) 0 0/100% no-repeat;
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+}
+
+.focus {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9);
 }
