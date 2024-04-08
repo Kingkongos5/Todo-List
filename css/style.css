@@ -201,7 +201,6 @@ body {
   min-height: 250px;
   background: #fff;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 25px;
   padding: 15px;
   overflow: auto;
   cursor: grab;
@@ -221,10 +220,16 @@ body {
   display: flex;
   flex-direction: column;
   outline: 0px solid rgb(53, 200, 104);
-  transition: box-shadow 0.6s ease 0s, outline 0.6s ease 0s;
+  overflow: hidden;
+  border-radius: 25px 25px 25px 25px;
+  rotate: 0deg;
+  transition: box-shadow 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s;
+}
+.list.grab {
+  transition: all 0s ease 0s;
 }
 .list.complited {
-  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s;
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
   box-shadow: inset 0 0 100px rgba(53, 200, 104, 0.5);
   outline: 6px solid rgb(53, 200, 104);
 }
@@ -235,11 +240,371 @@ body {
   rotate: 360deg;
   filter: blur(4px);
 }
+.list.remove:nth-child(1) {
+  transition: all 0.9s ease 0.1s;
+}
+.list.remove:nth-child(2) {
+  transition: all 0.9s ease 0.2s;
+}
+.list.remove:nth-child(3) {
+  transition: all 0.9s ease 0.3s;
+}
+.list.remove:nth-child(4) {
+  transition: all 0.9s ease 0.4s;
+}
+.list.remove:nth-child(5) {
+  transition: all 0.9s ease 0.5s;
+}
+.list.remove:nth-child(6) {
+  transition: all 0.9s ease 0.6s;
+}
+.list.remove:nth-child(7) {
+  transition: all 0.9s ease 0.7s;
+}
+.list.remove:nth-child(8) {
+  transition: all 0.9s ease 0.8s;
+}
+.list.remove:nth-child(9) {
+  transition: all 0.9s ease 0.9s;
+}
+.list.remove:nth-child(10) {
+  transition: all 0.9s ease 1s;
+}
+.list.remove:nth-child(11) {
+  transition: all 0.9s ease 1.1s;
+}
+.list.remove:nth-child(12) {
+  transition: all 0.9s ease 1.2s;
+}
+.list.remove:nth-child(13) {
+  transition: all 0.9s ease 1.3s;
+}
+.list.remove:nth-child(14) {
+  transition: all 0.9s ease 1.4s;
+}
+.list.remove:nth-child(15) {
+  transition: all 0.9s ease 1.5s;
+}
+.list.remove:nth-child(16) {
+  transition: all 0.9s ease 1.6s;
+}
+.list.remove:nth-child(17) {
+  transition: all 0.9s ease 1.7s;
+}
+.list.remove:nth-child(18) {
+  transition: all 0.9s ease 1.8s;
+}
+.list.remove:nth-child(19) {
+  transition: all 0.9s ease 1.9s;
+}
+.list.remove:nth-child(20) {
+  transition: all 0.9s ease 2s;
+}
+.list.remove:nth-child(21) {
+  transition: all 0.9s ease 2.1s;
+}
+.list.remove:nth-child(22) {
+  transition: all 0.9s ease 2.2s;
+}
+.list.remove:nth-child(23) {
+  transition: all 0.9s ease 2.3s;
+}
+.list.remove:nth-child(24) {
+  transition: all 0.9s ease 2.4s;
+}
+.list.remove:nth-child(25) {
+  transition: all 0.9s ease 2.5s;
+}
+.list.remove:nth-child(26) {
+  transition: all 0.9s ease 2.6s;
+}
+.list.remove:nth-child(27) {
+  transition: all 0.9s ease 2.7s;
+}
+.list.remove:nth-child(28) {
+  transition: all 0.9s ease 2.8s;
+}
+.list.remove:nth-child(29) {
+  transition: all 0.9s ease 2.9s;
+}
+.list.remove:nth-child(30) {
+  transition: all 0.9s ease 3s;
+}
+.list.remove:nth-child(31) {
+  transition: all 0.9s ease 3.1s;
+}
+.list.remove:nth-child(32) {
+  transition: all 0.9s ease 3.2s;
+}
+.list.remove:nth-child(33) {
+  transition: all 0.9s ease 3.3s;
+}
+.list.remove:nth-child(34) {
+  transition: all 0.9s ease 3.4s;
+}
+.list.remove:nth-child(35) {
+  transition: all 0.9s ease 3.5s;
+}
+.list.remove:nth-child(36) {
+  transition: all 0.9s ease 3.6s;
+}
+.list.remove:nth-child(37) {
+  transition: all 0.9s ease 3.7s;
+}
+.list.remove:nth-child(38) {
+  transition: all 0.9s ease 3.8s;
+}
+.list.remove:nth-child(39) {
+  transition: all 0.9s ease 3.9s;
+}
+.list.remove:nth-child(40) {
+  transition: all 0.9s ease 4s;
+}
+.list.remove:nth-child(41) {
+  transition: all 0.9s ease 4.1s;
+}
+.list.remove:nth-child(42) {
+  transition: all 0.9s ease 4.2s;
+}
+.list.remove:nth-child(43) {
+  transition: all 0.9s ease 4.3s;
+}
+.list.remove:nth-child(44) {
+  transition: all 0.9s ease 4.4s;
+}
+.list.remove:nth-child(45) {
+  transition: all 0.9s ease 4.5s;
+}
+.list.remove:nth-child(46) {
+  transition: all 0.9s ease 4.6s;
+}
+.list.remove:nth-child(47) {
+  transition: all 0.9s ease 4.7s;
+}
+.list.remove:nth-child(48) {
+  transition: all 0.9s ease 4.8s;
+}
+.list.remove:nth-child(49) {
+  transition: all 0.9s ease 4.9s;
+}
+.list.remove:nth-child(50) {
+  transition: all 0.9s ease 5s;
+}
+.list.remove:nth-child(51) {
+  transition: all 0.9s ease 5.1s;
+}
+.list.remove:nth-child(52) {
+  transition: all 0.9s ease 5.2s;
+}
+.list.remove:nth-child(53) {
+  transition: all 0.9s ease 5.3s;
+}
+.list.remove:nth-child(54) {
+  transition: all 0.9s ease 5.4s;
+}
+.list.remove:nth-child(55) {
+  transition: all 0.9s ease 5.5s;
+}
+.list.remove:nth-child(56) {
+  transition: all 0.9s ease 5.6s;
+}
+.list.remove:nth-child(57) {
+  transition: all 0.9s ease 5.7s;
+}
+.list.remove:nth-child(58) {
+  transition: all 0.9s ease 5.8s;
+}
+.list.remove:nth-child(59) {
+  transition: all 0.9s ease 5.9s;
+}
+.list.remove:nth-child(60) {
+  transition: all 0.9s ease 6s;
+}
 .list.removeTwo {
   transform: translate(0%, -150%);
   opacity: 0;
   scale: 0;
   transition: all 0.9s ease 0s;
+}
+.list.removeTwo:nth-child(1) {
+  transition: all 0.9s ease 0.1s;
+}
+.list.removeTwo:nth-child(2) {
+  transition: all 0.9s ease 0.2s;
+}
+.list.removeTwo:nth-child(3) {
+  transition: all 0.9s ease 0.3s;
+}
+.list.removeTwo:nth-child(4) {
+  transition: all 0.9s ease 0.4s;
+}
+.list.removeTwo:nth-child(5) {
+  transition: all 0.9s ease 0.5s;
+}
+.list.removeTwo:nth-child(6) {
+  transition: all 0.9s ease 0.6s;
+}
+.list.removeTwo:nth-child(7) {
+  transition: all 0.9s ease 0.7s;
+}
+.list.removeTwo:nth-child(8) {
+  transition: all 0.9s ease 0.8s;
+}
+.list.removeTwo:nth-child(9) {
+  transition: all 0.9s ease 0.9s;
+}
+.list.removeTwo:nth-child(10) {
+  transition: all 0.9s ease 1s;
+}
+.list.removeTwo:nth-child(11) {
+  transition: all 0.9s ease 1.1s;
+}
+.list.removeTwo:nth-child(12) {
+  transition: all 0.9s ease 1.2s;
+}
+.list.removeTwo:nth-child(13) {
+  transition: all 0.9s ease 1.3s;
+}
+.list.removeTwo:nth-child(14) {
+  transition: all 0.9s ease 1.4s;
+}
+.list.removeTwo:nth-child(15) {
+  transition: all 0.9s ease 1.5s;
+}
+.list.removeTwo:nth-child(16) {
+  transition: all 0.9s ease 1.6s;
+}
+.list.removeTwo:nth-child(17) {
+  transition: all 0.9s ease 1.7s;
+}
+.list.removeTwo:nth-child(18) {
+  transition: all 0.9s ease 1.8s;
+}
+.list.removeTwo:nth-child(19) {
+  transition: all 0.9s ease 1.9s;
+}
+.list.removeTwo:nth-child(20) {
+  transition: all 0.9s ease 2s;
+}
+.list.removeTwo:nth-child(21) {
+  transition: all 0.9s ease 2.1s;
+}
+.list.removeTwo:nth-child(22) {
+  transition: all 0.9s ease 2.2s;
+}
+.list.removeTwo:nth-child(23) {
+  transition: all 0.9s ease 2.3s;
+}
+.list.removeTwo:nth-child(24) {
+  transition: all 0.9s ease 2.4s;
+}
+.list.removeTwo:nth-child(25) {
+  transition: all 0.9s ease 2.5s;
+}
+.list.removeTwo:nth-child(26) {
+  transition: all 0.9s ease 2.6s;
+}
+.list.removeTwo:nth-child(27) {
+  transition: all 0.9s ease 2.7s;
+}
+.list.removeTwo:nth-child(28) {
+  transition: all 0.9s ease 2.8s;
+}
+.list.removeTwo:nth-child(29) {
+  transition: all 0.9s ease 2.9s;
+}
+.list.removeTwo:nth-child(30) {
+  transition: all 0.9s ease 3s;
+}
+.list.removeTwo:nth-child(31) {
+  transition: all 0.9s ease 3.1s;
+}
+.list.removeTwo:nth-child(32) {
+  transition: all 0.9s ease 3.2s;
+}
+.list.removeTwo:nth-child(33) {
+  transition: all 0.9s ease 3.3s;
+}
+.list.removeTwo:nth-child(34) {
+  transition: all 0.9s ease 3.4s;
+}
+.list.removeTwo:nth-child(35) {
+  transition: all 0.9s ease 3.5s;
+}
+.list.removeTwo:nth-child(36) {
+  transition: all 0.9s ease 3.6s;
+}
+.list.removeTwo:nth-child(37) {
+  transition: all 0.9s ease 3.7s;
+}
+.list.removeTwo:nth-child(38) {
+  transition: all 0.9s ease 3.8s;
+}
+.list.removeTwo:nth-child(39) {
+  transition: all 0.9s ease 3.9s;
+}
+.list.removeTwo:nth-child(40) {
+  transition: all 0.9s ease 4s;
+}
+.list.removeTwo:nth-child(41) {
+  transition: all 0.9s ease 4.1s;
+}
+.list.removeTwo:nth-child(42) {
+  transition: all 0.9s ease 4.2s;
+}
+.list.removeTwo:nth-child(43) {
+  transition: all 0.9s ease 4.3s;
+}
+.list.removeTwo:nth-child(44) {
+  transition: all 0.9s ease 4.4s;
+}
+.list.removeTwo:nth-child(45) {
+  transition: all 0.9s ease 4.5s;
+}
+.list.removeTwo:nth-child(46) {
+  transition: all 0.9s ease 4.6s;
+}
+.list.removeTwo:nth-child(47) {
+  transition: all 0.9s ease 4.7s;
+}
+.list.removeTwo:nth-child(48) {
+  transition: all 0.9s ease 4.8s;
+}
+.list.removeTwo:nth-child(49) {
+  transition: all 0.9s ease 4.9s;
+}
+.list.removeTwo:nth-child(50) {
+  transition: all 0.9s ease 5s;
+}
+.list.removeTwo:nth-child(51) {
+  transition: all 0.9s ease 5.1s;
+}
+.list.removeTwo:nth-child(52) {
+  transition: all 0.9s ease 5.2s;
+}
+.list.removeTwo:nth-child(53) {
+  transition: all 0.9s ease 5.3s;
+}
+.list.removeTwo:nth-child(54) {
+  transition: all 0.9s ease 5.4s;
+}
+.list.removeTwo:nth-child(55) {
+  transition: all 0.9s ease 5.5s;
+}
+.list.removeTwo:nth-child(56) {
+  transition: all 0.9s ease 5.6s;
+}
+.list.removeTwo:nth-child(57) {
+  transition: all 0.9s ease 5.7s;
+}
+.list.removeTwo:nth-child(58) {
+  transition: all 0.9s ease 5.8s;
+}
+.list.removeTwo:nth-child(59) {
+  transition: all 0.9s ease 5.9s;
+}
+.list.removeTwo:nth-child(60) {
+  transition: all 0.9s ease 6s;
 }
 .list__title {
   user-select: none;
@@ -254,11 +619,20 @@ body {
   resize: none;
   position: relative;
   z-index: -1;
+  pointer-events: none;
+  user-select: none;
+  transition: all 0.6s ease 0s;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+.list__title.focus {
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.9);
+  padding-right: 2.25rem;
 }
 .list__title[value] {
   position: relative;
   z-index: 1;
   pointer-events: none;
+  user-select: none;
 }
 .list__title-image {
   position: absolute;
@@ -270,6 +644,7 @@ body {
   border-radius: 50%;
   right: 0;
   top: 50%;
+  z-index: 10;
   transform: translate(0%, -50%);
   border: 1px solid #000;
   cursor: pointer;
@@ -380,4 +755,28 @@ body {
 .list__button-complited.complited:hover {
   transition: all 0.3s ease 0s;
   background: rgba(0, 0, 0, 0.3);
+}
+
+.del {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  left: 40%;
+  top: 2%;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgb(106, 81, 208);
+  transition: all 0.6s ease 0s;
+}
+.del img {
+  width: 64px;
+  height: 64px;
+}
+.del:not(:hover) {
+  transition: all 0.6s ease 0s;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
 }
