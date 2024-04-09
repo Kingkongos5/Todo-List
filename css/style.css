@@ -235,378 +235,394 @@ body {
   box-shadow: inset 0 0 100px rgba(53, 200, 104, 0.5);
   outline: 6px solid rgb(53, 200, 104);
 }
-.list.remove {
+.list.complited.grab {
+  transition: all 0s ease 0s;
+}
+.list.removeAll {
   transition: all 0.9s ease 0s;
   scale: 0.1;
   opacity: 0;
   rotate: 360deg;
   filter: blur(4px);
 }
-.list.remove:nth-child(1) {
+.list.removeAll:nth-child(1) {
   transition: all 0.9s ease 0.1s;
 }
-.list.remove:nth-child(2) {
+.list.removeAll:nth-child(2) {
   transition: all 0.9s ease 0.2s;
 }
-.list.remove:nth-child(3) {
+.list.removeAll:nth-child(3) {
   transition: all 0.9s ease 0.3s;
 }
-.list.remove:nth-child(4) {
+.list.removeAll:nth-child(4) {
   transition: all 0.9s ease 0.4s;
 }
-.list.remove:nth-child(5) {
+.list.removeAll:nth-child(5) {
   transition: all 0.9s ease 0.5s;
 }
-.list.remove:nth-child(6) {
+.list.removeAll:nth-child(6) {
   transition: all 0.9s ease 0.6s;
 }
-.list.remove:nth-child(7) {
+.list.removeAll:nth-child(7) {
   transition: all 0.9s ease 0.7s;
 }
-.list.remove:nth-child(8) {
+.list.removeAll:nth-child(8) {
   transition: all 0.9s ease 0.8s;
 }
-.list.remove:nth-child(9) {
+.list.removeAll:nth-child(9) {
   transition: all 0.9s ease 0.9s;
 }
-.list.remove:nth-child(10) {
+.list.removeAll:nth-child(10) {
   transition: all 0.9s ease 1s;
 }
-.list.remove:nth-child(11) {
+.list.removeAll:nth-child(11) {
   transition: all 0.9s ease 1.1s;
 }
-.list.remove:nth-child(12) {
+.list.removeAll:nth-child(12) {
   transition: all 0.9s ease 1.2s;
 }
-.list.remove:nth-child(13) {
+.list.removeAll:nth-child(13) {
   transition: all 0.9s ease 1.3s;
 }
-.list.remove:nth-child(14) {
+.list.removeAll:nth-child(14) {
   transition: all 0.9s ease 1.4s;
 }
-.list.remove:nth-child(15) {
+.list.removeAll:nth-child(15) {
   transition: all 0.9s ease 1.5s;
 }
-.list.remove:nth-child(16) {
+.list.removeAll:nth-child(16) {
   transition: all 0.9s ease 1.6s;
 }
-.list.remove:nth-child(17) {
+.list.removeAll:nth-child(17) {
   transition: all 0.9s ease 1.7s;
 }
-.list.remove:nth-child(18) {
+.list.removeAll:nth-child(18) {
   transition: all 0.9s ease 1.8s;
 }
-.list.remove:nth-child(19) {
+.list.removeAll:nth-child(19) {
   transition: all 0.9s ease 1.9s;
 }
-.list.remove:nth-child(20) {
+.list.removeAll:nth-child(20) {
   transition: all 0.9s ease 2s;
 }
-.list.remove:nth-child(21) {
+.list.removeAll:nth-child(21) {
   transition: all 0.9s ease 2.1s;
 }
-.list.remove:nth-child(22) {
+.list.removeAll:nth-child(22) {
   transition: all 0.9s ease 2.2s;
 }
-.list.remove:nth-child(23) {
+.list.removeAll:nth-child(23) {
   transition: all 0.9s ease 2.3s;
 }
-.list.remove:nth-child(24) {
+.list.removeAll:nth-child(24) {
   transition: all 0.9s ease 2.4s;
 }
-.list.remove:nth-child(25) {
+.list.removeAll:nth-child(25) {
   transition: all 0.9s ease 2.5s;
 }
-.list.remove:nth-child(26) {
+.list.removeAll:nth-child(26) {
   transition: all 0.9s ease 2.6s;
 }
-.list.remove:nth-child(27) {
+.list.removeAll:nth-child(27) {
   transition: all 0.9s ease 2.7s;
 }
-.list.remove:nth-child(28) {
+.list.removeAll:nth-child(28) {
   transition: all 0.9s ease 2.8s;
 }
-.list.remove:nth-child(29) {
+.list.removeAll:nth-child(29) {
   transition: all 0.9s ease 2.9s;
 }
-.list.remove:nth-child(30) {
+.list.removeAll:nth-child(30) {
   transition: all 0.9s ease 3s;
 }
-.list.remove:nth-child(31) {
+.list.removeAll:nth-child(31) {
   transition: all 0.9s ease 3.1s;
 }
-.list.remove:nth-child(32) {
+.list.removeAll:nth-child(32) {
   transition: all 0.9s ease 3.2s;
 }
-.list.remove:nth-child(33) {
+.list.removeAll:nth-child(33) {
   transition: all 0.9s ease 3.3s;
 }
-.list.remove:nth-child(34) {
+.list.removeAll:nth-child(34) {
   transition: all 0.9s ease 3.4s;
 }
-.list.remove:nth-child(35) {
+.list.removeAll:nth-child(35) {
   transition: all 0.9s ease 3.5s;
 }
-.list.remove:nth-child(36) {
+.list.removeAll:nth-child(36) {
   transition: all 0.9s ease 3.6s;
 }
-.list.remove:nth-child(37) {
+.list.removeAll:nth-child(37) {
   transition: all 0.9s ease 3.7s;
 }
-.list.remove:nth-child(38) {
+.list.removeAll:nth-child(38) {
   transition: all 0.9s ease 3.8s;
 }
-.list.remove:nth-child(39) {
+.list.removeAll:nth-child(39) {
   transition: all 0.9s ease 3.9s;
 }
-.list.remove:nth-child(40) {
+.list.removeAll:nth-child(40) {
   transition: all 0.9s ease 4s;
 }
-.list.remove:nth-child(41) {
+.list.removeAll:nth-child(41) {
   transition: all 0.9s ease 4.1s;
 }
-.list.remove:nth-child(42) {
+.list.removeAll:nth-child(42) {
   transition: all 0.9s ease 4.2s;
 }
-.list.remove:nth-child(43) {
+.list.removeAll:nth-child(43) {
   transition: all 0.9s ease 4.3s;
 }
-.list.remove:nth-child(44) {
+.list.removeAll:nth-child(44) {
   transition: all 0.9s ease 4.4s;
 }
-.list.remove:nth-child(45) {
+.list.removeAll:nth-child(45) {
   transition: all 0.9s ease 4.5s;
 }
-.list.remove:nth-child(46) {
+.list.removeAll:nth-child(46) {
   transition: all 0.9s ease 4.6s;
 }
-.list.remove:nth-child(47) {
+.list.removeAll:nth-child(47) {
   transition: all 0.9s ease 4.7s;
 }
-.list.remove:nth-child(48) {
+.list.removeAll:nth-child(48) {
   transition: all 0.9s ease 4.8s;
 }
-.list.remove:nth-child(49) {
+.list.removeAll:nth-child(49) {
   transition: all 0.9s ease 4.9s;
 }
-.list.remove:nth-child(50) {
+.list.removeAll:nth-child(50) {
   transition: all 0.9s ease 5s;
 }
-.list.remove:nth-child(51) {
+.list.removeAll:nth-child(51) {
   transition: all 0.9s ease 5.1s;
 }
-.list.remove:nth-child(52) {
+.list.removeAll:nth-child(52) {
   transition: all 0.9s ease 5.2s;
 }
-.list.remove:nth-child(53) {
+.list.removeAll:nth-child(53) {
   transition: all 0.9s ease 5.3s;
 }
-.list.remove:nth-child(54) {
+.list.removeAll:nth-child(54) {
   transition: all 0.9s ease 5.4s;
 }
-.list.remove:nth-child(55) {
+.list.removeAll:nth-child(55) {
   transition: all 0.9s ease 5.5s;
 }
-.list.remove:nth-child(56) {
+.list.removeAll:nth-child(56) {
   transition: all 0.9s ease 5.6s;
 }
-.list.remove:nth-child(57) {
+.list.removeAll:nth-child(57) {
   transition: all 0.9s ease 5.7s;
 }
-.list.remove:nth-child(58) {
+.list.removeAll:nth-child(58) {
   transition: all 0.9s ease 5.8s;
 }
-.list.remove:nth-child(59) {
+.list.removeAll:nth-child(59) {
   transition: all 0.9s ease 5.9s;
 }
-.list.remove:nth-child(60) {
+.list.removeAll:nth-child(60) {
   transition: all 0.9s ease 6s;
+}
+.list.removeTwoAll {
+  transform: translate(0%, -150%);
+  opacity: 0;
+  scale: 0;
+  transition: all 0.9s ease 0s;
+}
+.list.removeTwoAll:nth-child(1) {
+  transition: all 0.9s ease 0.1s;
+}
+.list.removeTwoAll:nth-child(2) {
+  transition: all 0.9s ease 0.2s;
+}
+.list.removeTwoAll:nth-child(3) {
+  transition: all 0.9s ease 0.3s;
+}
+.list.removeTwoAll:nth-child(4) {
+  transition: all 0.9s ease 0.4s;
+}
+.list.removeTwoAll:nth-child(5) {
+  transition: all 0.9s ease 0.5s;
+}
+.list.removeTwoAll:nth-child(6) {
+  transition: all 0.9s ease 0.6s;
+}
+.list.removeTwoAll:nth-child(7) {
+  transition: all 0.9s ease 0.7s;
+}
+.list.removeTwoAll:nth-child(8) {
+  transition: all 0.9s ease 0.8s;
+}
+.list.removeTwoAll:nth-child(9) {
+  transition: all 0.9s ease 0.9s;
+}
+.list.removeTwoAll:nth-child(10) {
+  transition: all 0.9s ease 1s;
+}
+.list.removeTwoAll:nth-child(11) {
+  transition: all 0.9s ease 1.1s;
+}
+.list.removeTwoAll:nth-child(12) {
+  transition: all 0.9s ease 1.2s;
+}
+.list.removeTwoAll:nth-child(13) {
+  transition: all 0.9s ease 1.3s;
+}
+.list.removeTwoAll:nth-child(14) {
+  transition: all 0.9s ease 1.4s;
+}
+.list.removeTwoAll:nth-child(15) {
+  transition: all 0.9s ease 1.5s;
+}
+.list.removeTwoAll:nth-child(16) {
+  transition: all 0.9s ease 1.6s;
+}
+.list.removeTwoAll:nth-child(17) {
+  transition: all 0.9s ease 1.7s;
+}
+.list.removeTwoAll:nth-child(18) {
+  transition: all 0.9s ease 1.8s;
+}
+.list.removeTwoAll:nth-child(19) {
+  transition: all 0.9s ease 1.9s;
+}
+.list.removeTwoAll:nth-child(20) {
+  transition: all 0.9s ease 2s;
+}
+.list.removeTwoAll:nth-child(21) {
+  transition: all 0.9s ease 2.1s;
+}
+.list.removeTwoAll:nth-child(22) {
+  transition: all 0.9s ease 2.2s;
+}
+.list.removeTwoAll:nth-child(23) {
+  transition: all 0.9s ease 2.3s;
+}
+.list.removeTwoAll:nth-child(24) {
+  transition: all 0.9s ease 2.4s;
+}
+.list.removeTwoAll:nth-child(25) {
+  transition: all 0.9s ease 2.5s;
+}
+.list.removeTwoAll:nth-child(26) {
+  transition: all 0.9s ease 2.6s;
+}
+.list.removeTwoAll:nth-child(27) {
+  transition: all 0.9s ease 2.7s;
+}
+.list.removeTwoAll:nth-child(28) {
+  transition: all 0.9s ease 2.8s;
+}
+.list.removeTwoAll:nth-child(29) {
+  transition: all 0.9s ease 2.9s;
+}
+.list.removeTwoAll:nth-child(30) {
+  transition: all 0.9s ease 3s;
+}
+.list.removeTwoAll:nth-child(31) {
+  transition: all 0.9s ease 3.1s;
+}
+.list.removeTwoAll:nth-child(32) {
+  transition: all 0.9s ease 3.2s;
+}
+.list.removeTwoAll:nth-child(33) {
+  transition: all 0.9s ease 3.3s;
+}
+.list.removeTwoAll:nth-child(34) {
+  transition: all 0.9s ease 3.4s;
+}
+.list.removeTwoAll:nth-child(35) {
+  transition: all 0.9s ease 3.5s;
+}
+.list.removeTwoAll:nth-child(36) {
+  transition: all 0.9s ease 3.6s;
+}
+.list.removeTwoAll:nth-child(37) {
+  transition: all 0.9s ease 3.7s;
+}
+.list.removeTwoAll:nth-child(38) {
+  transition: all 0.9s ease 3.8s;
+}
+.list.removeTwoAll:nth-child(39) {
+  transition: all 0.9s ease 3.9s;
+}
+.list.removeTwoAll:nth-child(40) {
+  transition: all 0.9s ease 4s;
+}
+.list.removeTwoAll:nth-child(41) {
+  transition: all 0.9s ease 4.1s;
+}
+.list.removeTwoAll:nth-child(42) {
+  transition: all 0.9s ease 4.2s;
+}
+.list.removeTwoAll:nth-child(43) {
+  transition: all 0.9s ease 4.3s;
+}
+.list.removeTwoAll:nth-child(44) {
+  transition: all 0.9s ease 4.4s;
+}
+.list.removeTwoAll:nth-child(45) {
+  transition: all 0.9s ease 4.5s;
+}
+.list.removeTwoAll:nth-child(46) {
+  transition: all 0.9s ease 4.6s;
+}
+.list.removeTwoAll:nth-child(47) {
+  transition: all 0.9s ease 4.7s;
+}
+.list.removeTwoAll:nth-child(48) {
+  transition: all 0.9s ease 4.8s;
+}
+.list.removeTwoAll:nth-child(49) {
+  transition: all 0.9s ease 4.9s;
+}
+.list.removeTwoAll:nth-child(50) {
+  transition: all 0.9s ease 5s;
+}
+.list.removeTwoAll:nth-child(51) {
+  transition: all 0.9s ease 5.1s;
+}
+.list.removeTwoAll:nth-child(52) {
+  transition: all 0.9s ease 5.2s;
+}
+.list.removeTwoAll:nth-child(53) {
+  transition: all 0.9s ease 5.3s;
+}
+.list.removeTwoAll:nth-child(54) {
+  transition: all 0.9s ease 5.4s;
+}
+.list.removeTwoAll:nth-child(55) {
+  transition: all 0.9s ease 5.5s;
+}
+.list.removeTwoAll:nth-child(56) {
+  transition: all 0.9s ease 5.6s;
+}
+.list.removeTwoAll:nth-child(57) {
+  transition: all 0.9s ease 5.7s;
+}
+.list.removeTwoAll:nth-child(58) {
+  transition: all 0.9s ease 5.8s;
+}
+.list.removeTwoAll:nth-child(59) {
+  transition: all 0.9s ease 5.9s;
+}
+.list.removeTwoAll:nth-child(60) {
+  transition: all 0.9s ease 6s;
+}
+.list.remove {
+  scale: 0.1;
+  opacity: 0;
+  rotate: 360deg;
+  filter: blur(4px);
+  transition: all 0.9s ease 0s;
 }
 .list.removeTwo {
   transform: translate(0%, -150%);
   opacity: 0;
   scale: 0;
   transition: all 0.9s ease 0s;
-}
-.list.removeTwo:nth-child(1) {
-  transition: all 0.9s ease 0.1s;
-}
-.list.removeTwo:nth-child(2) {
-  transition: all 0.9s ease 0.2s;
-}
-.list.removeTwo:nth-child(3) {
-  transition: all 0.9s ease 0.3s;
-}
-.list.removeTwo:nth-child(4) {
-  transition: all 0.9s ease 0.4s;
-}
-.list.removeTwo:nth-child(5) {
-  transition: all 0.9s ease 0.5s;
-}
-.list.removeTwo:nth-child(6) {
-  transition: all 0.9s ease 0.6s;
-}
-.list.removeTwo:nth-child(7) {
-  transition: all 0.9s ease 0.7s;
-}
-.list.removeTwo:nth-child(8) {
-  transition: all 0.9s ease 0.8s;
-}
-.list.removeTwo:nth-child(9) {
-  transition: all 0.9s ease 0.9s;
-}
-.list.removeTwo:nth-child(10) {
-  transition: all 0.9s ease 1s;
-}
-.list.removeTwo:nth-child(11) {
-  transition: all 0.9s ease 1.1s;
-}
-.list.removeTwo:nth-child(12) {
-  transition: all 0.9s ease 1.2s;
-}
-.list.removeTwo:nth-child(13) {
-  transition: all 0.9s ease 1.3s;
-}
-.list.removeTwo:nth-child(14) {
-  transition: all 0.9s ease 1.4s;
-}
-.list.removeTwo:nth-child(15) {
-  transition: all 0.9s ease 1.5s;
-}
-.list.removeTwo:nth-child(16) {
-  transition: all 0.9s ease 1.6s;
-}
-.list.removeTwo:nth-child(17) {
-  transition: all 0.9s ease 1.7s;
-}
-.list.removeTwo:nth-child(18) {
-  transition: all 0.9s ease 1.8s;
-}
-.list.removeTwo:nth-child(19) {
-  transition: all 0.9s ease 1.9s;
-}
-.list.removeTwo:nth-child(20) {
-  transition: all 0.9s ease 2s;
-}
-.list.removeTwo:nth-child(21) {
-  transition: all 0.9s ease 2.1s;
-}
-.list.removeTwo:nth-child(22) {
-  transition: all 0.9s ease 2.2s;
-}
-.list.removeTwo:nth-child(23) {
-  transition: all 0.9s ease 2.3s;
-}
-.list.removeTwo:nth-child(24) {
-  transition: all 0.9s ease 2.4s;
-}
-.list.removeTwo:nth-child(25) {
-  transition: all 0.9s ease 2.5s;
-}
-.list.removeTwo:nth-child(26) {
-  transition: all 0.9s ease 2.6s;
-}
-.list.removeTwo:nth-child(27) {
-  transition: all 0.9s ease 2.7s;
-}
-.list.removeTwo:nth-child(28) {
-  transition: all 0.9s ease 2.8s;
-}
-.list.removeTwo:nth-child(29) {
-  transition: all 0.9s ease 2.9s;
-}
-.list.removeTwo:nth-child(30) {
-  transition: all 0.9s ease 3s;
-}
-.list.removeTwo:nth-child(31) {
-  transition: all 0.9s ease 3.1s;
-}
-.list.removeTwo:nth-child(32) {
-  transition: all 0.9s ease 3.2s;
-}
-.list.removeTwo:nth-child(33) {
-  transition: all 0.9s ease 3.3s;
-}
-.list.removeTwo:nth-child(34) {
-  transition: all 0.9s ease 3.4s;
-}
-.list.removeTwo:nth-child(35) {
-  transition: all 0.9s ease 3.5s;
-}
-.list.removeTwo:nth-child(36) {
-  transition: all 0.9s ease 3.6s;
-}
-.list.removeTwo:nth-child(37) {
-  transition: all 0.9s ease 3.7s;
-}
-.list.removeTwo:nth-child(38) {
-  transition: all 0.9s ease 3.8s;
-}
-.list.removeTwo:nth-child(39) {
-  transition: all 0.9s ease 3.9s;
-}
-.list.removeTwo:nth-child(40) {
-  transition: all 0.9s ease 4s;
-}
-.list.removeTwo:nth-child(41) {
-  transition: all 0.9s ease 4.1s;
-}
-.list.removeTwo:nth-child(42) {
-  transition: all 0.9s ease 4.2s;
-}
-.list.removeTwo:nth-child(43) {
-  transition: all 0.9s ease 4.3s;
-}
-.list.removeTwo:nth-child(44) {
-  transition: all 0.9s ease 4.4s;
-}
-.list.removeTwo:nth-child(45) {
-  transition: all 0.9s ease 4.5s;
-}
-.list.removeTwo:nth-child(46) {
-  transition: all 0.9s ease 4.6s;
-}
-.list.removeTwo:nth-child(47) {
-  transition: all 0.9s ease 4.7s;
-}
-.list.removeTwo:nth-child(48) {
-  transition: all 0.9s ease 4.8s;
-}
-.list.removeTwo:nth-child(49) {
-  transition: all 0.9s ease 4.9s;
-}
-.list.removeTwo:nth-child(50) {
-  transition: all 0.9s ease 5s;
-}
-.list.removeTwo:nth-child(51) {
-  transition: all 0.9s ease 5.1s;
-}
-.list.removeTwo:nth-child(52) {
-  transition: all 0.9s ease 5.2s;
-}
-.list.removeTwo:nth-child(53) {
-  transition: all 0.9s ease 5.3s;
-}
-.list.removeTwo:nth-child(54) {
-  transition: all 0.9s ease 5.4s;
-}
-.list.removeTwo:nth-child(55) {
-  transition: all 0.9s ease 5.5s;
-}
-.list.removeTwo:nth-child(56) {
-  transition: all 0.9s ease 5.6s;
-}
-.list.removeTwo:nth-child(57) {
-  transition: all 0.9s ease 5.7s;
-}
-.list.removeTwo:nth-child(58) {
-  transition: all 0.9s ease 5.8s;
-}
-.list.removeTwo:nth-child(59) {
-  transition: all 0.9s ease 5.9s;
-}
-.list.removeTwo:nth-child(60) {
-  transition: all 0.9s ease 6s;
 }
 .list__addNewElement {
   width: 22px;
