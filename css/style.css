@@ -135,6 +135,35 @@ body {
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
+label {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid rgb(106, 81, 208);
+}
+label span:before {
+  transition: all 0.3s ease 0s;
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(53, 200, 104);
+  opacity: 0;
+}
+label.checked span:before {
+  transition: all 0.3s ease 0s;
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
 .main__container {
   display: flex;
   flex-wrap: wrap;
@@ -225,20 +254,20 @@ body {
   overflow: hidden;
   border-radius: 25px 25px 25px 25px;
   rotate: 0deg;
-  transition: box-shadow 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s;
-}
-.list.grab {
-  transition: all 0s ease 0s;
+  border: 6px solid transparent;
+  transition: box-shadow 0.6s ease 0s, border 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s;
 }
 .list.complited {
   transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
   box-shadow: inset 0 0 100px rgba(53, 200, 104, 0.5);
-  outline: 6px solid rgb(53, 200, 104);
+  border: 6px solid rgb(53, 200, 104);
 }
 .list.complited.grab {
   transition: all 0s ease 0s;
 }
 .list.removeAll {
+  pointer-events: none;
+  user-select: none;
   transition: all 0.9s ease 0s;
   scale: 0.1;
   opacity: 0;
@@ -426,6 +455,8 @@ body {
   transition: all 0.9s ease 6s;
 }
 .list.removeTwoAll {
+  pointer-events: none;
+  user-select: none;
   transform: translate(0%, -150%);
   opacity: 0;
   scale: 0;
@@ -612,6 +643,8 @@ body {
   transition: all 0.9s ease 6s;
 }
 .list.remove {
+  pointer-events: none;
+  user-select: none;
   scale: 0.1;
   opacity: 0;
   rotate: 360deg;
@@ -619,10 +652,36 @@ body {
   transition: all 0.9s ease 0s;
 }
 .list.removeTwo {
+  pointer-events: none;
+  user-select: none;
   transform: translate(0%, -150%);
   opacity: 0;
   scale: 0;
   transition: all 0.9s ease 0s;
+}
+.list.lock {
+  box-shadow: inset 0 0 200px rgb(151, 128, 242);
+  border: 6px solid rgb(151, 128, 242);
+}
+.list.lock ::placeholder {
+  color: #000;
+  transition: all 0.9s ease 0s;
+}
+.list.lock .list__button-lock {
+  transition: all 0.9s ease 0s;
+  background: rgb(133, 106, 240);
+}
+.list.lock .list__button-del {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.2;
+}
+.list.lock.complited {
+  outline: 0px;
+  box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 35px rgb(53, 200, 104);
+}
+.list.grab {
+  transition: all 0s ease 0s;
 }
 .list__addNewElement {
   width: 22px;
@@ -714,6 +773,9 @@ body {
   transform: translate(-50%, -50%);
   background: url(../img/mark.svg) 0 0/100% no-repeat;
 }
+.list__check-keydown {
+  display: none;
+}
 .list__hero {
   padding-top: 10px;
   flex: 0 1 100%;
@@ -760,6 +822,7 @@ body {
 .list__button-del {
   position: relative;
   transition: all 0.3s ease 0s;
+  background: rgba(255, 40, 52, 0.4);
 }
 .list__button-del:before {
   content: "";
@@ -778,6 +841,7 @@ body {
 .list__button-complited {
   position: relative;
   transition: all 0.3s ease 0s;
+  background: rgba(53, 200, 104, 0.4);
 }
 .list__button-complited:before {
   content: "";
@@ -800,6 +864,25 @@ body {
 .list__button-complited.complited:hover {
   transition: all 0.3s ease 0s;
   background: rgba(0, 0, 0, 0.3);
+}
+.list__button-lock {
+  padding: 3px;
+  padding-bottom: 5px;
+  background: rgba(106, 81, 208, 0.4);
+  transition: all 0.3s ease 0s;
+}
+.list__button-lock svg {
+  width: 24px;
+  height: 24px;
+  fill: #000;
+  transition: all 0.3s ease 0s;
+}
+.list__button-lock:hover {
+  transition: all 0.3s ease 0s;
+  background: rgb(151, 128, 242);
+}
+.list__button-lock:hover svg {
+  transition: all 0.3s ease 0s;
 }
 
 .del {
@@ -839,8 +922,8 @@ textarea {
   display: flex;
   align-self: start;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   right: 0;
   top: 18px;
@@ -862,8 +945,8 @@ textarea {
 }
 .list__title-edit-bg {
   position: relative;
-  width: 13px;
-  height: 13px;
+  width: 16px;
+  height: 16px;
 }
 .list__title-edit-bg:before {
   transition: all 0.3s ease 0s;
