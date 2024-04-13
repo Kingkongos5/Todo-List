@@ -5,31 +5,29 @@ const main = document.querySelector('.main__container');
 const brush = document.querySelector('.del');
 const listHero = document.querySelector('.list__hero');
 
-let id = 1;
+let id = 0;
 let idList = 0;
 let z = 1;
+let idItems = 0;
 let keyPressVariable;
 let btn;
 let btnText;
+let editVar;
+let statusBtn
 
 addEventListener('DOMContentLoaded', function (e) {
+   document.querySelectorAll('.edit, .focus').forEach((el) => {
+      if (el.classList.contains('focus')) {
+         el.classList.remove('edit')
+      }
+      if (el.classList.contains('focus')) {
+         el.classList.remove('focus')
+      }
+   })
    addEventListener('click', function (e) {
+      // Розфокус пунктів меню
       if (btn) {
-         if (`${btn.dataset.idlist}` != `${e.target.dataset.idlist}`) {
-            if (btn.classList.contains('edit')) {
-               btn.classList.remove('edit')
-               let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
-               h1.classList.remove("focus");
-               h1.blur();
-            }
-         } else if (e.target.classList.contains('list__button')) {
-            if (btn.classList.contains('edit')) {
-               btn.classList.remove('edit')
-               let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
-               h1.classList.remove("focus");
-               h1.blur();
-            }
-         }
+         editHidden(btn, e)
       }
       if (btnText) {
          if (btnText.dataset.id != e.target.dataset.id) {
@@ -58,6 +56,20 @@ addEventListener('DOMContentLoaded', function (e) {
       if ((e.target.classList.contains('list__title-image-bg') && !e.target.classList.contains('edit'))) {
          btnText = e.target;
       }
+
+
+      // Закриття статусу пунку стікера
+      if (statusBtn) {
+         if (statusBtn.dataset.id != e.target.dataset.id) {
+            if (!statusBtn.classList.contains('close')) {
+               statusBtn.classList.add('close')
+            }
+         }
+      }
+      if (e.target.classList.contains('select-list__current-value')) {
+         statusBtn = e.target.parentNode.parentNode
+      }
+
    })
    if (localStorage.getItem('articlesData') != '') {
       const beforeItems = JSON.parse(localStorage.getItem('articlesData'));
@@ -75,27 +87,7 @@ addEventListener('DOMContentLoaded', function (e) {
       })
 
       document.querySelectorAll('.list__addNewElement').forEach((btn) => createNewElement(btn));
-      document.querySelectorAll('.list__title-edit').forEach((btn) => {
-         btn.addEventListener("click", function () {
-            let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
-            h1.classList.toggle("focus");
-            if (h1.classList.contains('focus')) {
-               h1.focus();
-            } else {
-               h1.blur();
-            }
-            btn.classList.toggle('edit')
-            btn.children[0].classList.toggle('edit')
-            if (h1.classList.contains('new')) {
-               h1.classList.remove('new')
-               keyPressVariable = function (e) {
-                  keyPressForTitle(btn.dataset.idlist, e)
-               };
-               h1.addEventListener('input', keyPressVariable)
-            }
-         }
-         );
-      });
+      document.querySelectorAll('.list__title-edit').forEach((btn) => input(btn));
       document.querySelectorAll('.list__title-image').forEach((btn) => {
          btn.addEventListener("click", function () {
             let list = document.getElementById(`${btn.dataset.id}`)
@@ -135,17 +127,10 @@ addEventListener('DOMContentLoaded', function (e) {
          });
       });
       document.querySelectorAll('.list__button-complited').forEach((btn) => {
-         btn.addEventListener("click", function () {
-            let list = document.getElementById(`${btn.dataset.id}`)
-            if (list) {
-               list.classList.toggle('complited')
-               btn.classList.toggle('complited')
-            }
-         });
+         buttonComplited(btn, e)
       });
       document.querySelectorAll('.list__button-lock').forEach((btn) => {
          btn.addEventListener('click', function () {
-            console.log(456);
             let list = document.getElementById(`${btn.dataset.id}`);
             list.classList.toggle('lock')
          })
@@ -157,9 +142,16 @@ addEventListener('DOMContentLoaded', function (e) {
             }
          })
       })
+      document.querySelectorAll('.list__delete').forEach((list) => {
+         removeItemLine(list);
+      })
+      document.querySelectorAll('.select-list').forEach((stat) => {
+         editStatusLine(stat)
+      })
 
       idList += Number(localStorage.getItem('idList'));
-      id += Number(localStorage.getItem('id'))
+      idItems += Number(localStorage.getItem('idItems'));
+      id += Number(localStorage.getItem('id'));
    }
 })
 
@@ -177,7 +169,7 @@ addList.addEventListener('click', function () {
                </div>
                <div id="${id}-hero" class="list__hero"></div>
                <div data-id="${id}" class="list__addNewElement new">
-                  <span></span>
+                  <span class='span'></span>
                </div>
                <div class="list__button-menu">
                   <button data-id="${id}" class="list__button list__button-del new"></button>
@@ -208,7 +200,12 @@ addList.addEventListener('click', function () {
             }
          });
          document.querySelectorAll('.list__button-del').forEach((btn) => { buttonRemove(btn, e) });
-         document.querySelectorAll('.list__button-complited').forEach((btn) => { buttonComplited(btn, e) });
+         document.querySelectorAll('.list__button-complited').forEach((btn) => {
+            if (btn.classList.contains('new')) {
+               btn.classList.remove('new')
+               buttonComplited(btn, e)
+            }
+         });
          document.querySelectorAll('.list__title-image').forEach((btn) => { buttonTitleEdit(btn, e) });
          document.querySelectorAll('.list__button-lock').forEach((btn) => {
             if (btn.classList.contains('new')) {
@@ -225,7 +222,6 @@ addList.addEventListener('click', function () {
 });
 brush.addEventListener("dblclick", function del() {
    let listCount = document.querySelectorAll('.list').length;
-   console.log(listCount);
    document.querySelectorAll('.lock').forEach(() => {
       listCount -= 1;
    })
@@ -241,8 +237,42 @@ brush.addEventListener("dblclick", function del() {
          }, (800 + (100 * listCount)))
       }
    })
-   console.log(listCount);
 })
+
+function editHidden(btn, e, editVar) {
+   if (!e.target.classList.contains('list__addNewElement') && !e.target.classList.contains('span')) {
+      if (`${btn.dataset.idlist}` != `${e.target.dataset.idlist}`) {
+         if (btn.classList.contains('edit')) {
+            btn.classList.remove('edit')
+            let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
+            h1.classList.remove("focus");
+            h1.blur();
+            removeEventListener('click', editVar)
+         }
+      } else if (e.target.classList.contains('list__button')) {
+         if (btn.classList.contains('edit')) {
+            btn.classList.remove('edit')
+            let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
+            h1.classList.remove("focus");
+            h1.blur();
+            removeEventListener('click', editVar)
+         }
+      }
+   }
+}
+
+
+function removeItemLine(list) {
+   if (list) {
+      list.addEventListener('click', function () {
+         let item = document.getElementById(`${list.dataset.id}`);
+         item.classList.add('remove')
+         setTimeout(function () {
+            item.remove();
+         }, 650)
+      });
+   }
+}
 
 // Функція для заголовка
 function keyPress(id, e) {
@@ -254,15 +284,34 @@ function keyPress(id, e) {
    document.querySelectorAll('.list__title-image').forEach((btn) => {
       if ((btn.dataset.id == id) && btn.classList.contains("edit")) {
          h1.focus();
-         if (e.key == "Enter") {
-            if (h1.classList.contains('focus')) {
-               h1.classList.remove("focus");
-               h1.blur();
-            }
-            btn.classList.remove("edit");
-         }
       }
    })
+}
+
+// Додає класи для фокусу на інпуті
+function input(btn) {
+   btn.addEventListener("click", function () {
+      let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
+      h1.classList.toggle("focus");
+      if (h1.classList.contains('focus')) {
+         h1.focus();
+      } else {
+         h1.blur();
+      }
+      btn.classList.toggle('edit')
+      btn.children[0].classList.toggle('edit')
+      saveDatasetLabel(btn.dataset.idlist, h1)
+   }
+   );
+}
+
+
+// Зберігає дані списка для подальшого відновлення при перезавантажені сторінки
+function saveDatasetLabel(data, h1) {
+   keyPressVariable = function (e) {
+      keyPressForTitle(data, e)
+   };
+   h1.addEventListener('input', keyPressVariable)
 }
 
 // Функція для пунктів
@@ -274,13 +323,6 @@ function keyPressForTitle(id, e) {
    document.querySelectorAll('.list__title-edit').forEach((btn) => {
       if ((btn.dataset.idlist == id) && btn.classList.contains("edit")) {
          h2.focus();
-         if (e.key == "Enter") {
-            if (h2.classList.contains('focus')) {
-               h2.classList.remove("focus");
-               h2.blur();
-            }
-            btn.classList.remove("edit");
-         }
       }
    })
 }
@@ -300,41 +342,41 @@ function clearSelection() {
 
 // Фунуціія для створення нових пунктів меню
 function createNewElement(btn) {
-   btn.addEventListener("click", function () {
+   btn.addEventListener("click", function (e) {
       const hero = document.getElementById(`${btn.dataset.id}-hero`)
       if (hero) {
          hero.insertAdjacentHTML(
             'beforeend',
-            `<div class="list__item">` +
-            `<label class='label new'><input spellcheck="false" class="list__check-keydown" type="checkbox"><span></span></label>` +
-            `<textarea data-label='' id="${idList}-list-title" spellcheck="false" type="text" id="0text" class="list__check new" placeholder="Name"></textarea>` +
-            `<div data-idlist="${idList}-list" class="list__title-edit new">` +
-            `<div data-idlist="${idList}-list" class="list__title-edit-bg"></div>` +
-            `</div>` +
-            `</div>`
+            `<div id="${idItems}-item" class="list__item">
+            <div data-id='${idItems}-item-select' class="list__select select-list close new">
+            <div class="select-list__header">
+               <div id="${idItems}-item-status" data-id="${idItems}-item-select" class="select-list__current-value dont-start"><span></span></div>
+               <div class="select-list__content">
+               <div class="select-list__value complited-status" data-id="${idItems}-item-status" data-class='complited-status' title="Done"><span></span></div>
+               <div class="select-list__value in-progress" data-id="${idItems}-item-status" data-class='in-progress' title="In Progress"><span></span></div>
+               <div class="select-list__value dont-start" data-id="${idItems}-item-status" data-class='dont-start' title="Didn't start"><span></span></div>
+            </div>
+            </div>
+         </div>
+            <textarea data-label='' id="${idList}-list-title" spellcheck="false" type="text" id="0text"
+               class="list__check new" placeholder="Name"></textarea>
+            <div class="list__button-content">
+               <div data-idlist="${idList}-list" class="list__title-edit new event">
+                  <div data-idlist="${idList}-list" class="list__title-edit-bg"></div>
+               </div>
+               <div data-id="${idItems}-item" class="list__delete new">
+                  <span></span>
+               </div>
+            </div>
+         </div>`
          )
          document.querySelectorAll('.list__title-edit').forEach((btn) => {
             if (btn.classList.contains('new')) {
                btn.classList.remove('new')
-               btn.addEventListener("click", function () {
-                  console.log(456);
-                  let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
-                  h1.classList.toggle("focus");
-                  if (h1.classList.contains('focus')) {
-                     h1.focus();
-                  } else {
-                     h1.blur();
-                  }
-                  btn.classList.toggle('edit')
-                  if (h1.classList.contains('new')) {
-                     h1.classList.remove('new')
-                     keyPressVariable = function (e) {
-                        keyPressForTitle(btn.dataset.idlist, e)
-                     };
-                     h1.addEventListener('input', keyPressVariable)
-                  }
+               editVar = function (e) {
+                  editHidden(btn, e, editVar)
                }
-               );
+               focusElement(btn, editVar)
             }
          });
          document.querySelectorAll('.label').forEach((lab) => {
@@ -346,10 +388,22 @@ function createNewElement(btn) {
                   }
                })
             }
+         });
+         document.querySelectorAll('.list__delete').forEach((list) => {
+            if (list && list.classList.contains('new')) {
+               list.classList.remove('new');
+               removeItemLine(list)
+            }
+         });
+         document.querySelectorAll('.select-list').forEach((stat) => {
+            if (stat && stat.classList.contains('new')) {
+               stat.classList.remove('new')
+               editStatusLine(stat)
+            }
          })
-
       }
       idList += 1;
+      idItems += 1;
    });
 }
 
@@ -378,16 +432,36 @@ function buttonRemove(btn, e) {
 
 // Функція на позначення повного виконання стікера
 function buttonComplited(btn, e) {
-   if (btn.classList.contains('new')) {
-      btn.classList.remove('new')
-      btn.addEventListener("click", function () {
-         let list = document.getElementById(`${btn.dataset.id}`)
-         if (list) {
-            list.classList.toggle('complited')
-            btn.classList.toggle('complited')
+   btn.addEventListener("click", function () {
+      let done = 0;
+      let list = document.getElementById(`${btn.dataset.id}`)
+      let hero = Array.from(document.getElementById(`${btn.dataset.id}-hero`).children);
+      hero.forEach((item) => {
+         let status = document.getElementById(`${item.id}-status`);
+         if (status.classList.contains('complited-status')) {
+            done += 1;
+            if (item.classList.contains('no-complited')){
+               item.classList.remove('no-complited')
+            }
+         } else {
+            if (!item.classList.contains('no-complited')){
+               item.classList.add('no-complited')
+               setTimeout(function(){
+                  item.classList.remove('no-complited')
+               }, 1200)
+            }
          }
-      });
-   }
+      })
+      if (list && (done == hero.length)) {
+         list.classList.toggle('complited')
+         btn.classList.toggle('complited')
+      } else {
+         if (list.classList.contains('complited') && btn.classList.contains('complited')) {
+            list.classList.remove('complited')
+            btn.classList.remove('complited')
+         }
+      }
+   });
 }
 
 // Функція на редагування тексту
@@ -412,6 +486,32 @@ function buttonTitleEdit(btn, e) {
          }
       });
    }
+}
+
+function focusElement(btn, func) {
+   let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
+   if (h1.classList.contains('new')) {
+      h1.classList.remove('new')
+      input(btn, h1)
+   }
+   document.querySelectorAll('.list__title-edit, .list__check').forEach((el) => {
+      if (el.classList.contains('edit')) {
+         el.classList.remove('edit')
+      }
+      if (el.classList.contains('focus')) {
+         el.classList.remove('focus')
+      }
+   })
+   saveDatasetLabel(btn.dataset.idlist, h1)
+   btn.classList.toggle('edit')
+   h1.classList.toggle("focus");
+   h1.focus();
+   document.querySelectorAll('.edit').forEach((el) => {
+      if ((el.classList.contains('edit') && el.classList.contains('list__title-edit')) && el.classList.contains('event')) {
+         el.classList.remove('event');
+         addEventListener('click', func)
+      }
+   })
 }
 
 document.addEventListener('mousedown', function (e) {
@@ -498,7 +598,20 @@ document.addEventListener('mousedown', function (e) {
    }
 });
 
-
+function editStatusLine(el) {
+   el.addEventListener('click', function (e) {
+      el.classList.toggle('close')
+      if (e.target.classList.contains('select-list__value')) {
+         let stat = document.getElementById(`${e.target.dataset.id}`)
+         stat.classList.forEach((classlist) => {
+            if (classlist != 'select-list__current-value') {
+               stat.classList.remove(`${classlist}`);
+            }
+         })
+         stat.classList.add(`${e.target.dataset.class}`)
+      }
+   })
+}
 
 
 addEventListener('beforeunload', function () {
@@ -543,6 +656,7 @@ addEventListener('beforeunload', function () {
    }
    localStorage.setItem('id', maxIdObj.toString());
    localStorage.setItem('idList', idList.toString());
+   localStorage.setItem('idItems', idItems.toString());
 });
 
 
