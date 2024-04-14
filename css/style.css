@@ -189,7 +189,6 @@ label.checked span:before {
   position: absolute;
   width: 100%;
   min-height: 120px;
-  z-index: 10000;
   left: 0;
   top: 0;
   display: flex;
@@ -200,6 +199,8 @@ label.checked span:before {
   display: flex;
   justify-content: center;
   gap: 25px;
+  position: relative;
+  z-index: 10000;
 }
 @media (max-width: 628.98px) {
   .header__content {
