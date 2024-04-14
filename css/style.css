@@ -351,8 +351,8 @@ label.checked span:before {
   rotate: 0deg;
   scale: 1;
   border: 6px solid #d2d2d2;
-  box-shadow: 0px 0px 0px #f0c103;
-  transition: box-shadow 0.6s ease 0s, border 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s;
+  box-shadow: 0px 0px 0px #f0c103, inset 0px 0px 0px rgb(151, 128, 242);
+  transition: box-shadow 0.6s ease 0s, border 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s, outline 0.9s ease 0s;
 }
 .list:not(.grab) {
   transition: all 0.3s ease 0s;
@@ -772,8 +772,8 @@ label.checked span:before {
   transition: all 0.9s ease 0s;
 }
 .list.lock {
-  transition: box-shadow 0.9s ease 0s, border-radius 0.9s ease 0s, rotate 0.9s ease 0s;
-  box-shadow: inset 0 0 200px rgb(151, 128, 242);
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: 0px 0px 0px #f0c103, inset 0px 0px 200px rgb(151, 128, 242);
   border: 6px solid rgb(151, 128, 242);
 }
 .list.lock ::placeholder {
@@ -798,6 +798,9 @@ label.checked span:before {
 }
 .list.lock.complited.search {
   box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 15px rgb(53, 200, 104), 0px 0px 50px #f0c103;
+}
+.list.lock.search {
+  box-shadow: 0px 0px 50px #f0c103, inset 0px 0px 200px rgb(151, 128, 242);
 }
 .list.grab {
   transition: all 0s ease 0s;
