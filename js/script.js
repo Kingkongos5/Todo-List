@@ -4,6 +4,7 @@ const addList = document.querySelector('.plus');
 const main = document.querySelector('.main__container');
 const brush = document.querySelector('.del');
 const listHero = document.querySelector('.list__hero');
+const searchElement = document.querySelector(`.header__search-input`);
 
 let id = 0;
 let idList = 0;
@@ -13,17 +14,9 @@ let keyPressVariable;
 let btn;
 let btnText;
 let editVar;
-let statusBtn
+let statusBtn;
 
 addEventListener('DOMContentLoaded', function (e) {
-   document.querySelectorAll('.edit, .focus').forEach((el) => {
-      if (el.classList.contains('focus')) {
-         el.classList.remove('edit')
-      }
-      if (el.classList.contains('focus')) {
-         el.classList.remove('focus')
-      }
-   })
    addEventListener('click', function (e) {
       // Розфокус пунктів меню
       if (btn) {
@@ -57,6 +50,21 @@ addEventListener('DOMContentLoaded', function (e) {
          btnText = e.target;
       }
 
+      if (e.target.classList.contains('header__search') || e.target.classList.contains('header__search-img')) {
+         if (searchElement.parentNode.classList.contains('focus')) {
+            blurSearch()
+         }
+         searchElement.parentNode.classList.toggle('focus');
+         if (searchElement.parentNode.classList.contains('focus')) {
+            searchElement.focus();
+         }
+      }
+      if (!e.target.classList.contains('header__search') && !e.target.classList.contains('header__search-img') && !e.target.classList.contains('header__search-input')) {
+         if (window.innerWidth <= 628) {
+            blurSearch();
+            searchElement.parentNode.classList.remove('focus')
+         }
+      }
 
       // Закриття статусу пунку стікера
       if (statusBtn) {
@@ -239,6 +247,19 @@ brush.addEventListener("dblclick", function del() {
    })
 })
 
+function blurSearch() {
+   document.querySelectorAll(`.list`).forEach((list) => {
+      if (list && list.classList.contains('search')) {
+         list.classList.remove('search')
+         list.style.zIndex = `${z}`;
+      }
+   })
+   setTimeout(function () {
+      searchElement.value = '';
+   }, 200)
+   searchElement.blur();
+}
+
 function editHidden(btn, e, editVar) {
    if (!e.target.classList.contains('list__addNewElement') && !e.target.classList.contains('span')) {
       if (`${btn.dataset.idlist}` != `${e.target.dataset.idlist}`) {
@@ -258,6 +279,8 @@ function editHidden(btn, e, editVar) {
             removeEventListener('click', editVar)
          }
       }
+   } if (e.target.classList.contains(e.target.classList.contains('list__addNewElement')) || e.target.classList.contains('span')) {
+      setTimeout(function () { removeEventListener('click', editVar) }, 200000);
    }
 }
 
@@ -440,13 +463,13 @@ function buttonComplited(btn, e) {
          let status = document.getElementById(`${item.id}-status`);
          if (status.classList.contains('complited-status')) {
             done += 1;
-            if (item.classList.contains('no-complited')){
+            if (item.classList.contains('no-complited')) {
                item.classList.remove('no-complited')
             }
          } else {
-            if (!item.classList.contains('no-complited')){
+            if (!item.classList.contains('no-complited')) {
                item.classList.add('no-complited')
-               setTimeout(function(){
+               setTimeout(function () {
                   item.classList.remove('no-complited')
                }, 1200)
             }
@@ -514,6 +537,22 @@ function focusElement(btn, func) {
    })
 }
 
+function editStatusLine(el) {
+   el.addEventListener('click', function (e) {
+      el.classList.toggle('close')
+      if (e.target.classList.contains('select-list__value')) {
+         let stat = document.getElementById(`${e.target.dataset.id}`)
+         stat.classList.forEach((classlist) => {
+            if (classlist != 'select-list__current-value') {
+               stat.classList.remove(`${classlist}`);
+            }
+         })
+         stat.classList.add(`${e.target.dataset.class}`)
+      }
+   })
+}
+
+
 document.addEventListener('mousedown', function (e) {
    var el;
    let posX = e.clientX;
@@ -531,12 +570,19 @@ document.addEventListener('mousedown', function (e) {
       if (e.target.classList && e.target.classList.contains('list__item')) {
          el = e.target.parentNode.parentNode;
          el.classList.add('grab');
-         el.style.zIndex = `${z}`;
+         if (!el.classList.contains('search')) {
+            el.style.zIndex = `${z}`;
+         } else {
+            el.style.zIndex = '1001';
+         }
          addEventListener("mousemove", moveHandler);
          addEventListener("mouseup", mouseUp);
          function mouseUp() {
             if (el.classList.contains('grab')) {
                el.classList.remove('grab');
+               if(el.classList.contains('search')){
+                  el.style.zIndex = '1000';
+               }
             }
             el.style.borderRadius = "25px 25px 25px 25px";
             el.style.rotate = '0deg';
@@ -547,12 +593,19 @@ document.addEventListener('mousedown', function (e) {
       if (e.target.classList && e.target.classList.contains('list')) {
          el = e.target;
          el.classList.add('grab');
-         el.style.zIndex = `${z}`;
+         if (!el.classList.contains('search')) {
+            el.style.zIndex = `${z}`;
+         } else {
+            el.style.zIndex = '1001';
+         }
          addEventListener("mousemove", moveHandler);
          addEventListener("mouseup", mouseUp);
          function mouseUp() {
             if (el.classList.contains('grab')) {
                el.classList.remove('grab');
+               if(el.classList.contains('search')){
+                  el.style.zIndex = '1000';
+               }
             }
             el.style.borderRadius = "25px 25px 25px 25px";
             el.style.rotate = '0deg';
@@ -562,13 +615,20 @@ document.addEventListener('mousedown', function (e) {
       } else {
          if (e.target.classList && e.target.classList.contains('list__hero') || e.target.classList.contains('h1') || e.target.classList.contains('list__button-menu')) {
             el = e.target.parentNode;
-            el.style.zIndex = `${z}`;
+            if (!el.classList.contains('search')) {
+               el.style.zIndex = `${z}`;
+            } else {
+               el.style.zIndex = '1001';
+            }
             el.classList.add('grab');
             addEventListener("mousemove", moveHandler);
             addEventListener("mouseup", mouseUp);
             function mouseUp() {
                if (el.classList.contains('grab')) {
                   el.classList.remove('grab');
+                  if(el.classList.contains('search')){
+                     el.style.zIndex = '1000';
+                  }
                }
                el.style.borderRadius = "25px 25px 25px 25px";
                el.style.rotate = '0deg';
@@ -598,34 +658,21 @@ document.addEventListener('mousedown', function (e) {
    }
 });
 
-function editStatusLine(el) {
-   el.addEventListener('click', function (e) {
-      el.classList.toggle('close')
-      if (e.target.classList.contains('select-list__value')) {
-         let stat = document.getElementById(`${e.target.dataset.id}`)
-         stat.classList.forEach((classlist) => {
-            if (classlist != 'select-list__current-value') {
-               stat.classList.remove(`${classlist}`);
-            }
-         })
-         stat.classList.add(`${e.target.dataset.class}`)
-      }
-   })
-}
-
-
 addEventListener('beforeunload', function () {
    document.querySelectorAll('article').forEach((art) => {
       if (art.classList.contains('remove') || art.classList.contains('removeTwo') || art.classList.contains('removeAll') || art.classList.contains('removeTwoAll')) {
          art.remove();
       }
    })
-   document.querySelectorAll('.list__title-edit, .list__title-image, .list__title, .list__check').forEach((el) => {
+   document.querySelectorAll('.list__title-edit, .list__title-image, .list__title, .list__check, .list').forEach((el) => {
       if (el.classList.contains('focus')) {
          el.classList.remove('focus')
       }
       if (el.classList.contains('edit')) {
          el.classList.remove('edit')
+      }
+      if (el.classList.contains('search')) {
+         el.classList.remove('search')
       }
    })
    const art = document.querySelectorAll('article');
@@ -659,4 +706,21 @@ addEventListener('beforeunload', function () {
    localStorage.setItem('idItems', idItems.toString());
 });
 
-
+searchElement.addEventListener('input', function (e) {
+   let text = document.querySelectorAll(`.list__title`);
+   let searchTerm = searchElement.value.toLowerCase();
+   for (let i = 0; i < text.length; i++) {
+      let textString = text[i].value.toLowerCase();
+      if ((textString.indexOf(searchTerm) !== -1) && (searchTerm != '')) {
+         if (!text[i].parentNode.parentNode.classList.contains('search')) {
+            text[i].parentNode.parentNode.classList.add('search')
+            text[i].parentNode.parentNode.style.zIndex = '10000'
+         }
+      } else {
+         if (text[i].parentNode.parentNode.classList.contains('search')) {
+            text[i].parentNode.parentNode.style.zIndex = `${z}`
+            text[i].parentNode.parentNode.classList.remove('search')
+         }
+      }
+   }
+})
