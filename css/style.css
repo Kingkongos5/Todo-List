@@ -1513,6 +1513,40 @@ input[type=checkbox] {
 .footer__container .list.list__complited.complited.search {
   box-shadow: inset 0px 0px 0px rgb(151, 128, 242), inset 0 0 100px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
 }
+.footer__container .list.list__complited.lock {
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0px 0px 200px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 0px #f0c103;
+  border: 6px solid rgb(151, 128, 242);
+}
+.footer__container .list.list__complited.lock ::placeholder {
+  color: #000;
+  transition: all 0.9s ease 0s;
+}
+.footer__container .list.list__complited.lock .list__button-lock {
+  transition: all 0.9s ease 0s;
+  background: rgb(133, 106, 240);
+}
+.footer__container .list.list__complited.lock .list__button-del {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.2;
+}
+.footer__container .list.list__complited.lock .h1 {
+  border-bottom: 3px solid #aa7cbe;
+}
+.footer__container .list.list__complited.lock.complited {
+  outline: 0px;
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 35px rgb(53, 200, 104);
+}
+.footer__container .list.list__complited.lock.complited.search {
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 15px rgb(53, 200, 104), 0px 0px 50px #f0c103;
+}
+.footer__container .list.list__complited.lock.search {
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0px 0px 200px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
+}
 .footer__container .list.uncomplited {
   animation: hiddenn 1.8s ease 0s;
 }

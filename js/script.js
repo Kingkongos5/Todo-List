@@ -733,6 +733,13 @@ function touchMove(el, posX) {
          function moveHandler(e) {
             let clientX = e.targetTouches[0].clientX
             let clientY = e.targetTouches[0].clientY
+            if (posX < clientX) {
+               el.style.borderRadius = `25px 25px ${((clientX - posX) / 15) + 25}px 25px`;
+               el.style.rotate = `${(clientX - posX) / 35}deg`;
+            } else {
+               el.style.borderRadius = `25px 25px 25px ${((posX - clientX) / 10) + 25}px`;
+               el.style.rotate = `${(clientX - posX) / 35}deg`;
+            }
             let h1 = document.getElementById(`${el.id}text`).offsetHeight;
             if (el.offsetHeight >= 250) {
                el.style.left = (clientX - (el.offsetWidth / 1.75)) + 'px';
