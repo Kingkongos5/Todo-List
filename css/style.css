@@ -128,6 +128,15 @@ body {
   padding: 0px 0.9375rem;
 }
 
+body {
+  overflow: hidden;
+}
+@media (max-width: 1023.98px) {
+  body {
+    overflow-y: auto;
+  }
+}
+
 .wrapper {
   position: relative;
 }
@@ -137,7 +146,7 @@ body {
 }
 
 .main {
-  padding-top: 120px;
+  padding-top: 140px;
   overflow: hidden;
   background: url(../img/5497934.jpg) 0 0/100%;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
@@ -178,29 +187,41 @@ label.checked span:before {
 
 .main__container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   transition: all 0.6s ease 0s;
   gap: 15px;
   position: relative;
   min-height: 100vh;
 }
+.main__container.zIndex {
+  z-index: 0;
+}
 
 .header {
   position: absolute;
   width: 100%;
-  min-height: 120px;
+  min-height: 140px;
   left: 0;
-  top: 0;
+  top: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.header.zIndex {
+  position: fixed;
+  z-index: 12000;
+}
 .header__content {
+  padding-top: clamp( 0.9375rem , 0.9375rem  +  0vw , 0.9375rem );
+  padding-bottom: clamp( 0.9375rem , 0.9375rem  +  0vw , 0.9375rem );
+  padding-right: clamp( 1.5625rem , 1.3832104558rem  +  0.8936550492vw , 2.1875rem );
+  padding-left: clamp( 1.5625rem , 1.3832104558rem  +  0.8936550492vw , 2.1875rem );
+  border-radius: 50px;
   display: flex;
   justify-content: center;
-  gap: 25px;
+  gap: clamp( 0.625rem , 0.3560656836rem  +  1.3404825737vw , 1.5625rem );
+  background: rgba(129, 109, 211, 0.6);
   position: relative;
-  z-index: 10000;
 }
 @media (max-width: 628.98px) {
   .header__content {
@@ -229,12 +250,42 @@ label.checked span:before {
 .header__search-input {
   width: 0%;
   transition: all 0.6s ease 0s;
-  margin-left: 0;
-  margin-right: 0;
   font-size: clamp( 1rem , 0.7099753695rem  +  0.7389162562vw , 1.375rem );
+  padding: 0px;
+}
+.header__search-input-content {
+  width: 0%;
+  display: flex;
+  align-items: center;
+  background: #fff;
   border-radius: 25px;
   border: 2px solid rgb(106, 81, 208);
-  padding: 0px;
+  transition: all 0.6s ease 0s;
+  margin-left: 0px;
+  margin-right: 0px;
+  overflow: hidden;
+}
+.header__search-input::selection {
+  background: rgb(75, 75, 218);
+  color: #fff;
+}
+.header__search-btn {
+  padding: 5px 15px;
+  margin-right: 10px;
+  background: #e4e2e2;
+  color: #000;
+  border-radius: 5px;
+  border: 1px solid #000;
+  transition: all 0.15s ease 0s;
+}
+@media (min-width: 528.98px) {
+  .header__search-btn {
+    display: none;
+  }
+}
+.header__search-btn:active {
+  transition: all 0.15s ease 0s;
+  box-shadow: inset 0px 0px 8px rgb(255, 255, 255);
 }
 @media (max-width: 628.98px) {
   .header__search.focus {
@@ -243,14 +294,19 @@ label.checked span:before {
     height: 80px;
     left: 5%;
     top: 0.9375rem;
+    z-index: 11000;
   }
   .header__search.focus .header__search-input {
     transition: all 0.3s ease 0s;
     width: 100%;
+    padding: 10px 10px;
+  }
+  .header__search.focus .header__search-input-content {
+    width: 100%;
+    transition: all 0.3s ease 0s;
     margin-left: 25px;
     margin-right: 25px;
-    border: 2px solid rgb(96, 57, 251);
-    padding: 10px 10px;
+    border: 2px solid rgb(106, 81, 208);
   }
 }
 @media (min-width: 628.98px) {
@@ -263,10 +319,14 @@ label.checked span:before {
   .header__search.focus .header__search-input {
     transition: all 0.3s ease 0s;
     width: 100%;
+    padding: 10px 10px;
+  }
+  .header__search.focus .header__search-input-content {
+    width: 100%;
+    transition: all 0.3s ease 0s;
     margin-left: 25px;
     margin-right: 25px;
-    border: 2px solid rgb(96, 57, 251);
-    padding: 10px 10px;
+    border: 2px solid rgb(106, 81, 208);
   }
 }
 
@@ -323,12 +383,18 @@ label.checked span:before {
   width: 250px;
   max-height: 450px;
   background: #f6f6f6;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
   padding: 15px;
   cursor: grab;
 }
 .list:active {
   cursor: grabbing;
+}
+@media (max-width: 528.98px) {
+  .list {
+    position: static;
+    max-height: 100%;
+    width: 100%;
+  }
 }
 
 .h1 {
@@ -351,7 +417,7 @@ label.checked span:before {
   rotate: 0deg;
   scale: 1;
   border: 6px solid #d2d2d2;
-  box-shadow: 0px 0px 0px #f0c103, inset 0px 0px 0px rgb(151, 128, 242);
+  box-shadow: inset 0px 0px 0px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 0px #f0c103;
   transition: box-shadow 0.6s ease 0s, border 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s, outline 0.9s ease 0s;
 }
 .list:not(.grab) {
@@ -370,11 +436,11 @@ label.checked span:before {
   scale: 0.95;
 }
 .list.complited.search {
-  box-shadow: inset 0 0 100px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
+  box-shadow: inset 0px 0px 0px rgb(151, 128, 242), inset 0 0 100px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
 }
 .list.search {
   transition: box-shadow 0.6s ease 0s, border 0.6s ease 0s, outline 0.6s ease 0s, border-radius 0.3s ease 0s, rotate 0.9s ease 0s;
-  box-shadow: 0px 0px 50px #f0c103;
+  box-shadow: inset 0px 0px 0px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
   z-index: 100000;
 }
 .list.removeAll {
@@ -773,7 +839,7 @@ label.checked span:before {
 }
 .list.lock {
   transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
-  box-shadow: 0px 0px 0px #f0c103, inset 0px 0px 200px rgb(151, 128, 242);
+  box-shadow: inset 0px 0px 200px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 0px #f0c103;
   border: 6px solid rgb(151, 128, 242);
 }
 .list.lock ::placeholder {
@@ -794,13 +860,16 @@ label.checked span:before {
 }
 .list.lock.complited {
   outline: 0px;
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
   box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 35px rgb(53, 200, 104);
 }
 .list.lock.complited.search {
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
   box-shadow: inset 0 0 200px rgb(151, 128, 242), 0px 0px 15px rgb(53, 200, 104), 0px 0px 50px #f0c103;
 }
 .list.lock.search {
-  box-shadow: 0px 0px 50px #f0c103, inset 0px 0px 200px rgb(151, 128, 242);
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0px 0px 200px rgb(151, 128, 242), inset 0 0 0px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
 }
 .list.grab {
   transition: all 0s ease 0s;
@@ -979,9 +1048,16 @@ label.checked span:before {
 .list__item:not(:first-child) {
   border-top: 3px solid #999;
 }
-.list__item:not(:hover) .list__delete {
-  transition: all 0.3s ease 0s;
-  opacity: 0;
+@media screen and (hover: hover) {
+  .list__item:not(:hover) .list__delete {
+    transition: all 0.3s ease 0s;
+    opacity: 0;
+  }
+}
+@media screen and (hover: none) {
+  .list__item .list__delete {
+    opacity: 1;
+  }
 }
 .list__check {
   font-size: 14px;
@@ -1322,4 +1398,201 @@ input[type=checkbox] {
 .select-list__value.dont-start span {
   background: rgb(255, 40, 52);
   box-shadow: 0px 0px 5px rgba(255, 40, 52, 0.6);
+}
+
+.footer {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 0px;
+  bottom: 0;
+  left: 0;
+  background: transparent;
+  padding: 15px 15px;
+  z-index: 1000;
+  transition: all 0.6s ease 0s;
+}
+.footer.open {
+  height: 100%;
+  background: #000;
+}
+.footer__save__cont {
+  position: fixed;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  min-width: 80px;
+  height: 80px;
+  background: rgb(106, 81, 208);
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.75);
+  transition: all 0.8s ease 0s;
+  right: 15px;
+  bottom: 15px;
+}
+.footer__save__cont:hover {
+  transition: all 0.3s ease 0s;
+  background: rgb(101, 67, 236);
+}
+.footer__save__cont.complited {
+  transition: all 0.9s ease 0s;
+  box-shadow: 0px 0px 50px rgb(53, 200, 104);
+}
+.footer__save__cont.open + .footer__container {
+  transition: bottom 0.9s ease 0s, right 0.9s ease 0s, width 0.6s ease 0s, height 0.6s ease 0s, border-radius 1.2s ease 0s, background 0.6s ease 0s, transform 0.6s ease 0s;
+  width: 100vw;
+  height: 100vh;
+}
+.footer__save__cont.open + .footer__container .list.list__complited {
+  transition: all 1.5s ease 0s;
+  opacity: 1;
+}
+.footer__save-new {
+  position: relative;
+  font-family: serif;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  right: 0;
+  top: 0;
+  background: rgba(129, 109, 211, 0.6);
+  border-radius: 50%;
+  color: #fff;
+}
+.footer__container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  justify-content: center;
+  align-items: start;
+  padding-top: 140px;
+  padding-bottom: 15px;
+  gap: clamp( 0.9375rem , 0.7582104558rem  +  0.8936550492vw , 1.5625rem );
+  z-index: -1;
+  bottom: 0%;
+  right: 0%;
+  width: 1vw;
+  height: 1vh;
+  transform: translate(0%, 0%);
+  aspect-ratio: 1/1;
+  transition: bottom 0.6s ease 0s, right 0.6s ease 0s, width 0.9s ease 0s, height 0.9s ease 0s, border-radius 0.9s ease 0s, background 0.9s ease 0s, transform 0.6s ease 0s;
+}
+.footer__container .list.list__complited {
+  flex: 0 1 250px;
+  transition: all 0.3s ease 0s;
+  position: static;
+  max-height: 100%;
+  opacity: 0;
+  cursor: default;
+}
+@media (max-width: 528.98px) {
+  .footer__container .list.list__complited {
+    flex: 0 1 100%;
+  }
+}
+.footer__container .list.list__complited .h1 {
+  height: auto;
+}
+.footer__container .list.list__complited.complited {
+  transition: box-shadow 0.9s ease 0s, outline 0.9s ease 0s, rotate 0.6s ease 0s, border-radius 0.6s ease 0s;
+  box-shadow: inset 0 0 100px rgba(53, 200, 104, 0.5);
+  border: 6px solid rgb(53, 200, 104);
+}
+.footer__container .list.list__complited.complited .h1 {
+  border-bottom: 3px solid #aa7cbe;
+}
+.footer__container .list.list__complited.complited.grab {
+  transition: all 0s ease 0s;
+  scale: 0.95;
+}
+.footer__container .list.list__complited.complited.search {
+  box-shadow: inset 0px 0px 0px rgb(151, 128, 242), inset 0 0 100px rgba(53, 200, 104, 0.5), 0px 0px 50px #f0c103;
+}
+.footer__container .list.uncomplited {
+  animation: hiddenn 1.8s ease 0s;
+}
+@media (min-width: 528.98px) {
+  @keyframes hiddenn {
+    from {
+      scale: 1;
+      box-shadow: inset 0px 0px 100px rgba(53, 200, 104, 0.6), 0 0 300px rgba(53, 200, 104, 0.3);
+    }
+    35% {
+      scale: 1.2;
+      box-shadow: inset 0px 0px 50px rgb(53, 200, 104), 0 0 0px rgb(53, 200, 104);
+    }
+    75% {
+      scale: 0.05;
+      box-shadow: inset 0px 0px 0px rgba(53, 200, 104, 0.6), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    to {
+      scale: 0;
+    }
+  }
+}
+@media (max-width: 528.98px) {
+  @keyframes hiddenn {
+    from {
+      scale: 1;
+      box-shadow: inset 0px 0px 100px rgb(53, 200, 104), 0 0 300px rgba(53, 200, 104, 0.3);
+    }
+    35% {
+      scale: 1.05;
+      box-shadow: inset 0px 0px 0px rgb(53, 200, 104), 0 0 0px rgb(53, 200, 104);
+    }
+    75% {
+      scale: 0.05;
+      box-shadow: inset 0px 0px 0px rgb(53, 200, 104), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    to {
+      scale: 0;
+    }
+  }
+}
+
+.main__container .list.list__complited {
+  animation: hidden 1.8s ease 0s;
+}
+@media (min-width: 528.98px) {
+  @keyframes hidden {
+    from {
+      scale: 1;
+      box-shadow: inset 0px 0px 0px rgb(53, 200, 104), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    35% {
+      scale: 1.2;
+      box-shadow: inset 0px 0px 100px rgb(53, 200, 104), 0 0 300px rgb(53, 200, 104);
+    }
+    75% {
+      scale: 0.05;
+      box-shadow: inset 0px 0px 100px rgb(53, 200, 104), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    to {
+      scale: 0;
+    }
+  }
+}
+@media (max-width: 528.98px) {
+  @keyframes hidden {
+    from {
+      scale: 1;
+      box-shadow: inset 0px 0px 0px rgb(53, 200, 104), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    35% {
+      scale: 1.05;
+      box-shadow: inset 0px 0px 100px rgb(53, 200, 104), 0 0 300px rgb(53, 200, 104);
+    }
+    75% {
+      scale: 0.05;
+      box-shadow: inset 0px 0px 100px rgb(53, 200, 104), 0 0 0px rgba(53, 200, 104, 0.3);
+    }
+    to {
+      scale: 0;
+    }
+  }
 }

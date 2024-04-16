@@ -5,64 +5,109 @@ const main = document.querySelector('.main__container');
 const brush = document.querySelector('.del');
 const listHero = document.querySelector('.list__hero');
 const searchElement = document.querySelector(`.header__search-input`);
+const findElement = document.querySelector(`.header__search-btn`);
+const header = document.querySelector(`.header`);
+const footer = document.querySelector(`.footer__container`);
+const saveComplitedList = document.querySelector(`.footer__save`);
+const footerCheckSave = document.querySelector(`.footer__save-new`);
 
 let id = 0;
 let idList = 0;
 let z = 1;
 let idItems = 0;
 let keyPressVariable;
-let btn;
 let btnText;
 let editVar;
 let statusBtn;
 
 addEventListener('DOMContentLoaded', function (e) {
    addEventListener('click', function (e) {
-      // Розфокус пунктів меню
-      if (btn) {
-         editHidden(btn, e)
-      }
-      if (btnText) {
-         if (btnText.dataset.id != e.target.dataset.id) {
-            if (btnText.parentNode.classList.contains('edit')) {
-               btnText.parentNode.classList.remove('edit')
-               let h1 = document.getElementById(`${btnText.dataset.id}text`);
-               h1.classList.remove("focus");
-               h1.blur();
-            }
-         } else if (e.target.classList.contains('list__button')) {
-            if (btnText.parentNode.classList.contains('edit')) {
-               btnText.parentNode.classList.remove('edit')
-               let h1 = document.getElementById(`${btnText.dataset.id}text`);
-               h1.classList.remove("focus");
-               h1.blur();
-            }
-         }
-      }
-      if (((e.target.classList.contains('list__title-edit') || e.target.classList.contains('list__title-edit-bg')))) {
-         if (e.target.classList.contains('list__title-edit-bg')) {
-            btn = e.target.parentNode;
+      if (e.target.closest('.list__title-edit-bg')) {
+         if (e.target.closest('.list__title-edit.edit')) {
+            document.querySelectorAll(`.edit, .focus`).forEach((editElement) => {
+               if (editElement.classList.contains('edit')) { editElement.classList.remove('edit') };
+               if (editElement.classList.contains('focus')) { editElement.classList.remove('focus') };
+            })
+            e.target.parentNode.classList.add('edit');
+            let h2 = e.target.parentNode.dataset.idlist;
+            document.getElementById(`${h2}-title`).classList.add('focus')
          } else {
-            btn = e.target;
+            e.target.parentNode.classList.remove('edit')
          }
-      }
-      if ((e.target.classList.contains('list__title-image-bg') && !e.target.classList.contains('edit'))) {
-         btnText = e.target;
+      } else {
+         if (e.target.closest('.list__title-image-bg')) {
+            document.querySelectorAll(`.edit, .focus`).forEach((titleBeforeEditElement) => {
+               if (titleBeforeEditElement.classList.contains('list__title-edit') || titleBeforeEditElement.classList.contains('list__title-image')) {
+                  titleBeforeEditElement.classList.remove('edit')
+               }
+               if ((titleBeforeEditElement.classList.contains('list__check') || titleBeforeEditElement.classList.contains('list__title')) && !titleBeforeEditElement.classList.contains('header__search')) {
+                  titleBeforeEditElement.classList.remove('focus')
+               }
+            })
+            e.target.parentNode.classList.add('edit')
+            document.getElementById(`${e.target.dataset.id}text`).classList.add('focus')
+         } else {
+            document.querySelectorAll(`.edit, .focus`).forEach((editElement) => {
+               if (e.target.closest('.list__addNewElement')) {
+                  if (editElement.classList.contains('edit') && !editElement.classList.contains('no-edit')) {
+                     editElement.classList.remove('edit')
+                  }
+               } else {
+                  if (editElement.classList.contains('edit')) {
+                     editElement.classList.remove('edit')
+                  }
+                  if (editElement.classList.contains('focus') && !editElement.classList.contains('header__search')) {
+                     editElement.classList.remove('focus')
+                  }
+               }
+            })
+         }
       }
 
-      if (e.target.classList.contains('header__search') || e.target.classList.contains('header__search-img')) {
-         if (searchElement.parentNode.classList.contains('focus')) {
+      if (e.target.classList.contains('header__search') || e.target.classList.contains('header__search-img') || e.target.classList.contains('header__search-input-content')) {
+         if (searchElement.parentNode.parentNode.classList.contains('focus')) {
             blurSearch()
          }
-         searchElement.parentNode.classList.toggle('focus');
-         if (searchElement.parentNode.classList.contains('focus')) {
+         searchElement.parentNode.parentNode.classList.toggle('focus');
+         if (searchElement.parentNode.parentNode.classList.contains('focus')) {
             searchElement.focus();
          }
       }
-      if (!e.target.classList.contains('header__search') && !e.target.classList.contains('header__search-img') && !e.target.classList.contains('header__search-input')) {
-         if (window.innerWidth <= 628) {
+      if (!e.target.closest('.header__search') && !e.target.closest('.header__search-input-content')) {
+         if (window.innerWidth <= 1023.98) {
             blurSearch();
-            searchElement.parentNode.classList.remove('focus')
+            searchElement.parentNode.parentNode.classList.remove('focus')
+         }
+      }
+      if (e.target.closest('.footer__save') || e.target.classList.contains('footer__save-img')) {
+         if (e.target.closest('.footer__save-new') || e.target.closest('.footer__save-img')) {
+            if (e.target == document.querySelector(`.footer__save-path`)) {
+               document.querySelector(`.footer__save`).classList.toggle('open')
+            } else {
+               e.target.parentNode.classList.toggle('open')
+            }
+            if (document.querySelector(`.footer__save`).classList.contains('open')) {
+               header.classList.add('zIndex')
+               main.classList.add('zIndex')
+               document.querySelector(`.footer`).classList.add('open')
+               document.querySelector(`.footer__save__cont`).classList.add('open')
+            } else {
+               header.classList.remove('zIndex')
+               main.classList.remove('zIndex')
+               document.querySelector(`.footer`).classList.remove('open')
+               document.querySelector(`.footer__save__cont`).classList.remove('open')
+            }
+
+         } else {
+            e.target.classList.toggle('open')
+            if (e.target.classList.contains('open')) {
+               header.classList.add('zIndex')
+               main.classList.add('zIndex')
+            } else {
+               header.classList.remove('zIndex')
+               main.classList.remove('zIndex')
+
+            }
          }
       }
 
@@ -78,22 +123,42 @@ addEventListener('DOMContentLoaded', function (e) {
          statusBtn = e.target.parentNode.parentNode
       }
 
-   })
-   if (localStorage.getItem('articlesData') != '') {
-      const beforeItems = JSON.parse(localStorage.getItem('articlesData'));
-      for (let i = 0; i < beforeItems.length; i++) {
-         main.insertAdjacentHTML(
-            'beforeend',
-            `${beforeItems[i].htmlContent}`
-         )
+      if (e.target == findElement) {
+         let searchElement = document.querySelectorAll(`.search`);
+         if (searchElement[0]) {
+            searchElement[0].scrollIntoView({ behavior: 'smooth', block: 'center' })
+         }
       }
+
+   })
+   if ((localStorage.getItem('articlesData') != '') || localStorage.getItem('articlesDataSave') != '') {
+      const beforeItems = JSON.parse(localStorage.getItem('articlesData'));
+      if (beforeItems) {
+         for (let i = 0; i < beforeItems.length; i++) {
+            main.insertAdjacentHTML(
+               'beforeend',
+               `${beforeItems[i].htmlContent}`
+            )
+         }
+      }
+      const beforeItemsSave = JSON.parse(localStorage.getItem('articlesDataSave'));
+      if (beforeItemsSave) {
+         for (let i = 0; i < beforeItemsSave.length; i++) {
+            footer.insertAdjacentHTML(
+               'beforeend',
+               `${beforeItemsSave[i].htmlContent}`
+            )
+         }
+      }
+
+      footerCheckSave.textContent = footer.children.length
+      footerCheckSave.style.background = `rgb(${footerCheckSave.textContent + 129}, ${109 - footerCheckSave.textContent * 2}, ${211 - footerCheckSave.textContent * 2}, 0.6)`
 
       document.querySelectorAll('[data-label]').forEach((lab) => {
          if (lab.dataset.label) {
             lab.value = lab.dataset.label;
          }
       })
-
       document.querySelectorAll('.list__addNewElement').forEach((btn) => createNewElement(btn));
       document.querySelectorAll('.list__title-edit').forEach((btn) => input(btn));
       document.querySelectorAll('.list__title-image').forEach((btn) => {
@@ -167,7 +232,7 @@ addList.addEventListener('click', function () {
    main.insertAdjacentHTML(
 
       'beforeend',
-      `<article id="${id}" class="list" style="top: 0px; left: 0px">
+      `<article id="${id}" class="list" style="top: 0px; left: 0px; z-index: ${z + 1}">
                <div class="h1">
                   <textarea spellcheck="false" maxlength="100" type="text" data-label='' id="${id}text"
                      class="list__title" placeholder="Name"></textarea>
@@ -228,7 +293,13 @@ addList.addEventListener('click', function () {
    }
    id += 1;
 });
-brush.addEventListener("dblclick", function del() {
+brush.addEventListener("dblclick", del)
+
+function start() {
+
+}
+
+function del() {
    let listCount = document.querySelectorAll('.list').length;
    document.querySelectorAll('.lock').forEach(() => {
       listCount -= 1;
@@ -242,10 +313,12 @@ brush.addEventListener("dblclick", function del() {
          }
          setTimeout(function () {
             list.remove();
+            footerCheckSave.textContent = footer.children.length
+            footerCheckSave.style.background = `rgb(${footerCheckSave.textContent + 129}, ${109 - footerCheckSave.textContent * 2}, ${211 - footerCheckSave.textContent * 2}, 0.6)`
          }, (800 + (100 * listCount)))
       }
    })
-})
+}
 
 function blurSearch() {
    document.querySelectorAll(`.list`).forEach((list) => {
@@ -330,15 +403,18 @@ function input(btn) {
 
 
 // Зберігає дані списка для подальшого відновлення при перезавантажені сторінки
-function saveDatasetLabel(data, h1) {
+function saveDatasetLabel(data, h1, btn) {
    keyPressVariable = function (e) {
-      keyPressForTitle(data, e)
+      keyPressForTitle(data, e, btn)
    };
    h1.addEventListener('input', keyPressVariable)
 }
 
 // Функція для пунктів
-function keyPressForTitle(id, e) {
+function keyPressForTitle(id, e, btn) {
+   if (btn && btn.classList.contains('no-edit')) {
+      btn.classList.remove('no-edit')
+   }
    const h2 = document.getElementById(`${id}-title`);
    h2.style.height = 'auto';
    h2.style.height = h2.scrollHeight + 'px';
@@ -384,7 +460,7 @@ function createNewElement(btn) {
             <textarea data-label='' id="${idList}-list-title" spellcheck="false" type="text" id="0text"
                class="list__check new" placeholder="Name"></textarea>
             <div class="list__button-content">
-               <div data-idlist="${idList}-list" class="list__title-edit new event">
+               <div data-idlist="${idList}-list" class="list__title-edit new event no-edit">
                   <div data-idlist="${idList}-list" class="list__title-edit-bg"></div>
                </div>
                <div data-id="${idItems}-item" class="list__delete new">
@@ -396,10 +472,7 @@ function createNewElement(btn) {
          document.querySelectorAll('.list__title-edit').forEach((btn) => {
             if (btn.classList.contains('new')) {
                btn.classList.remove('new')
-               editVar = function (e) {
-                  editHidden(btn, e, editVar)
-               }
-               focusElement(btn, editVar)
+               focusElement(btn)
             }
          });
          document.querySelectorAll('.label').forEach((lab) => {
@@ -447,6 +520,8 @@ function buttonRemove(btn, e) {
             }
             setTimeout(function () {
                list.remove();
+               footerCheckSave.textContent = footer.children.length
+               footerCheckSave.style.background = `rgb(${129 + footerCheckSave.textContent}, ${109 - footerCheckSave.textContent * 2}, ${211 - footerCheckSave.textContent * 2}, 0.6)`
             }, 900)
          }
       });
@@ -475,13 +550,44 @@ function buttonComplited(btn, e) {
             }
          }
       })
-      if (list && (done == hero.length)) {
-         list.classList.toggle('complited')
-         btn.classList.toggle('complited')
+      if (list && (done == hero.length) && !list.classList.contains('list__complited')) {
+         list.classList.toggle('complited');
+         list.classList.toggle('list__complited');
+         btn.classList.toggle('complited');
+         let complitedList = list;
+         setTimeout(function () {
+            footer.appendChild(complitedList)
+            footerCheckSave.textContent = footer.children.length
+         }, 1800)
+         list.classList.add('translate')
+         setTimeout(function () {
+            saveComplitedList.parentNode.classList.add('complited')
+            setTimeout(function () {
+               saveComplitedList.parentNode.classList.remove('complited')
+               list.classList.remove('translate')
+               footerCheckSave.style.background = `rgb(${129 + footerCheckSave.textContent}, ${109 - footerCheckSave.textContent * 2}, ${211 - footerCheckSave.textContent * 2}, 0.6)`
+            }, 900)
+         }, 1800)
       } else {
          if (list.classList.contains('complited') && btn.classList.contains('complited')) {
-            list.classList.remove('complited')
-            btn.classList.remove('complited')
+            list.classList.remove('complited');
+            list.classList.add('translate')
+            list.classList.add('uncomplited');
+            btn.classList.remove('complited');
+            let unComplitedList = list;
+            setTimeout(function () {
+               main.appendChild(unComplitedList)
+               footerCheckSave.textContent = footer.children.length
+            }, 1800)
+            setTimeout(function () {
+               setTimeout(function () {
+                  list.classList.remove('list__complited');
+                  list.classList.remove('uncomplited');
+                  list.classList.remove('translate')
+                  footerCheckSave.style.background = `rgb(${129 + footerCheckSave.textContent}, ${109 - footerCheckSave.textContent * 2}, ${211 - footerCheckSave.textContent * 2}, 0.6)`
+               }, 900)
+            }, 1800)
+            footerCheckSave.textContent = footer.children.length
          }
       }
    });
@@ -511,7 +617,7 @@ function buttonTitleEdit(btn, e) {
    }
 }
 
-function focusElement(btn, func) {
+function focusElement(btn) {
    let h1 = document.getElementById(`${btn.dataset.idlist}-title`);
    if (h1.classList.contains('new')) {
       h1.classList.remove('new')
@@ -525,16 +631,10 @@ function focusElement(btn, func) {
          el.classList.remove('focus')
       }
    })
-   saveDatasetLabel(btn.dataset.idlist, h1)
+   saveDatasetLabel(btn.dataset.idlist, h1, btn)
    btn.classList.toggle('edit')
    h1.classList.toggle("focus");
    h1.focus();
-   document.querySelectorAll('.edit').forEach((el) => {
-      if ((el.classList.contains('edit') && el.classList.contains('list__title-edit')) && el.classList.contains('event')) {
-         el.classList.remove('event');
-         addEventListener('click', func)
-      }
-   })
 }
 
 function editStatusLine(el) {
@@ -552,114 +652,158 @@ function editStatusLine(el) {
    })
 }
 
+function handleDragAndDrop(el, posX) {
+   if (!el.classList.contains('list__complited')) {
+      if (window.innerWidth >= 529) {
+         el.classList.add('grab');
+         if (!el.classList.contains('search')) {
+            el.style.zIndex = `${z}`;
+         } else {
+            el.style.zIndex = '1001';
+         }
+         addEventListener("mousemove", moveHandler);
+         addEventListener("mouseup", mouseUp);
+         function mouseUp() {
+            if (el.classList.contains('grab')) {
+               el.classList.remove('grab');
+               if (el.classList.contains('search')) {
+                  el.style.zIndex = '1000';
+               }
+            }
+            el.style.borderRadius = "25px 25px 25px 25px";
+            el.style.rotate = '0deg';
+            removeEventListener("mousemove", moveHandler);
+            removeEventListener('mouseup', mouseUp);
+         }
 
-document.addEventListener('mousedown', function (e) {
-   var el;
-   let posX = e.clientX;
-   z += 1;
-   clearSelection();
-   if (!e.target || e.target == document) {
-      return;
-   } else {
-      if (e.target.classList && e.target.classList.contains('list__title-image')) {
-         return;
-      }
-      if (e.target.parentNode && e.target.parentNode.classList && e.target.parentNode.classList.contains('list__title-image')) {
-         return;
-      }
-      if (e.target.classList && e.target.classList.contains('list__item')) {
-         el = e.target.parentNode.parentNode;
-         el.classList.add('grab');
-         if (!el.classList.contains('search')) {
-            el.style.zIndex = `${z}`;
-         } else {
-            el.style.zIndex = '1001';
-         }
-         addEventListener("mousemove", moveHandler);
-         addEventListener("mouseup", mouseUp);
-         function mouseUp() {
-            if (el.classList.contains('grab')) {
-               el.classList.remove('grab');
-               if(el.classList.contains('search')){
-                  el.style.zIndex = '1000';
-               }
-            }
-            el.style.borderRadius = "25px 25px 25px 25px";
-            el.style.rotate = '0deg';
-            removeEventListener("mousemove", moveHandler);
-            removeEventListener('mouseup', mouseUp);
-         }
-      }
-      if (e.target.classList && e.target.classList.contains('list')) {
-         el = e.target;
-         el.classList.add('grab');
-         if (!el.classList.contains('search')) {
-            el.style.zIndex = `${z}`;
-         } else {
-            el.style.zIndex = '1001';
-         }
-         addEventListener("mousemove", moveHandler);
-         addEventListener("mouseup", mouseUp);
-         function mouseUp() {
-            if (el.classList.contains('grab')) {
-               el.classList.remove('grab');
-               if(el.classList.contains('search')){
-                  el.style.zIndex = '1000';
-               }
-            }
-            el.style.borderRadius = "25px 25px 25px 25px";
-            el.style.rotate = '0deg';
-            removeEventListener("mousemove", moveHandler);
-            removeEventListener('mouseup', mouseUp);
-         }
-      } else {
-         if (e.target.classList && e.target.classList.contains('list__hero') || e.target.classList.contains('h1') || e.target.classList.contains('list__button-menu')) {
-            el = e.target.parentNode;
-            if (!el.classList.contains('search')) {
-               el.style.zIndex = `${z}`;
+         function moveHandler(e) {
+            if (posX < e.clientX) {
+               el.style.borderRadius = `25px 25px ${((e.clientX - posX) / 15) + 25}px 25px`;
+               el.style.rotate = `${(e.clientX - posX) / 35}deg`;
             } else {
-               el.style.zIndex = '1001';
+               el.style.borderRadius = `25px 25px 25px ${((posX - e.clientX) / 10) + 25}px`;
+               el.style.rotate = `${(e.clientX - posX) / 35}deg`;
             }
-            el.classList.add('grab');
-            addEventListener("mousemove", moveHandler);
-            addEventListener("mouseup", mouseUp);
-            function mouseUp() {
-               if (el.classList.contains('grab')) {
-                  el.classList.remove('grab');
-                  if(el.classList.contains('search')){
-                     el.style.zIndex = '1000';
-                  }
-               }
-               el.style.borderRadius = "25px 25px 25px 25px";
-               el.style.rotate = '0deg';
-               removeEventListener("mousemove", moveHandler);
-               removeEventListener('mouseup', mouseUp);
+            let h1 = document.getElementById(`${el.id}text`).offsetHeight;
+            let kof;
+            if (window.innerWidth >= 1750){
+               kof = 0.75;
             }
-         }
-      }
-
-      function moveHandler(e) {
-         if (posX < e.clientX) {
-            el.style.borderRadius = `25px 25px ${((e.clientX - posX) / 15) + 25}px 25px`;
-            el.style.rotate = `${(e.clientX - posX) / 35}deg`;
-         } else {
-            el.style.borderRadius = `25px 25px 25px ${((posX - e.clientX) / 10) + 25}px`;
-            el.style.rotate = `${(e.clientX - posX) / 35}deg`;
-         }
-         let h1 = document.getElementById(`${el.id}text`).offsetHeight;
-         if (el.offsetHeight >= 250) {
-            el.style.left = (e.clientX - (el.offsetWidth / 1.75)) + 'px';
-            el.style.top = (e.clientY - (el.offsetHeight - (125 * (el.offsetHeight / 200)) + h1)) + 'px';
-         } else {
-            el.style.left = (e.clientX - (el.offsetWidth / 1.75)) + 'px';
-            el.style.top = (e.clientY - (el.offsetHeight / 2 + h1)) + 'px';
+            if (window.innerWidth >= 1440 && window.innerWidth <= 1750){
+               kof = 1.25
+            }
+            if (window.innerWidth <= 1440){
+               kof = 1.75
+            }
+            if (el.offsetHeight >= 250) {
+               el.style.left = (e.clientX - (el.offsetWidth / `${kof}`)) + 'px';
+               el.style.top = (e.clientY - (el.offsetHeight - (125 * (el.offsetHeight / 200)) + h1)) + 'px';
+            } else {
+               el.style.left = (e.clientX - (el.offsetWidth / `${kof}`)) + 'px';
+               el.style.top = (e.clientY - (el.offsetHeight / 2 + h1)) + 'px';
+            }
          }
       }
    }
-});
+}
+
+function touchMove(el, posX) {
+   if (!el.classList.contains('list__complited')) {
+      if (window.innerWidth >= 529) {
+         el.classList.add('grab');
+         if (!el.classList.contains('search')) {
+            el.style.zIndex = `${z}`;
+         } else {
+            el.style.zIndex = '1001';
+         }
+         addEventListener("touchmove", moveHandler);
+         addEventListener("touchend", touchUp);
+         function touchUp() {
+            if (el.classList.contains('grab')) {
+               el.classList.remove('grab');
+               if (el.classList.contains('search')) {
+                  el.style.zIndex = '1000';
+               }
+            }
+            el.style.borderRadius = "25px 25px 25px 25px";
+            el.style.rotate = '0deg';
+            removeEventListener("touchmove", moveHandler);
+            removeEventListener('touchend', touchUp);
+         }
+         function moveHandler(e) {
+            let clientX = e.targetTouches[0].clientX
+            let clientY = e.targetTouches[0].clientY
+            let h1 = document.getElementById(`${el.id}text`).offsetHeight;
+            if (el.offsetHeight >= 250) {
+               el.style.left = (clientX - (el.offsetWidth / 1.75)) + 'px';
+               el.style.top = (clientY - (el.offsetHeight - (125 * (el.offsetHeight / 200)) + h1)) + 'px';
+            } else {
+               el.style.left = (clientX - (el.offsetWidth / 1.75)) + 'px';
+               el.style.top = (clientY - (el.offsetHeight / 2 + h1)) + 'px';
+            }
+         }
+      }
+   }
+}
+
+function currentElementSearch(e) {
+   var el;
+   z += 1;
+   if (e.type != 'touchstart') {
+      let posX = e.clientX;
+      if (!e.target || e.target == document) {
+         return;
+      } else {
+         if (e.target.classList && e.target.classList.contains('list__title-image')) {
+            return;
+         }
+         if (e.target.parentNode && e.target.parentNode.classList && e.target.parentNode.classList.contains('list__title-image')) {
+            return;
+         }
+         if (e.target.classList && e.target.classList.contains('list__item')) {
+            el = e.target.parentNode.parentNode;
+            handleDragAndDrop(el, posX)
+         }
+         if (e.target.classList && e.target.classList.contains('list')) {
+            el = e.target;
+            handleDragAndDrop(el, posX)
+         } else {
+            if (e.target.classList && e.target.classList.contains('list__hero') || e.target.classList.contains('h1') || e.target.classList.contains('list__button-menu')) {
+               el = e.target.parentNode;
+               handleDragAndDrop(el, posX)
+            }
+         }
+      }
+   } else {
+      let posX = e.targetTouches[0].clientX;
+      if (!e.target || e.target == document) {
+         return;
+      } else {
+         if (e.target.classList && e.target.classList.contains('list__title-image')) {
+            return;
+         }
+         if (e.target.parentNode && e.target.parentNode.classList && e.target.parentNode.classList.contains('list__title-image')) {
+            return;
+         }
+         if (e.target.classList && e.target.classList.contains('list__item')) {
+            el = e.targetTouches[0].target.parentNode.parentNode;
+            touchMove(el, posX)
+         }
+         if (e.target.classList && e.target.classList.contains('list')) {
+            el = e.targetTouches[0].target;
+            touchMove(el, posX)
+         } else {
+            if (e.target.classList && e.target.classList.contains('list__hero') || e.target.classList.contains('h1') || e.target.classList.contains('list__button-menu')) {
+               el = e.targetTouches[0].target.parentNode;
+               touchMove(el, posX)
+            }
+         }
+      }
+   }
+}
 
 addEventListener('beforeunload', function () {
-   document.querySelectorAll('article').forEach((art) => {
+   document.querySelectorAll('.list').forEach((art) => {
       if (art.classList.contains('remove') || art.classList.contains('removeTwo') || art.classList.contains('removeAll') || art.classList.contains('removeTwoAll')) {
          art.remove();
       }
@@ -675,6 +819,19 @@ addEventListener('beforeunload', function () {
          el.classList.remove('search')
       }
    })
+   document.querySelectorAll(`.list__complited.translate, .uncomplited.translate`).forEach((translateElements) => {
+      if (translateElements.classList.contains('list__complited') && !translateElements.classList.contains('uncomplited')) {
+         translateElements.classList.remove('translate')
+         let toFooter = translateElements;
+         footer.appendChild(toFooter)
+      } else {
+         translateElements.classList.remove('translate')
+         translateElements.classList.remove('uncomplited')
+         translateElements.classList.remove('list__complited')
+         let toMain = translateElements;
+         main.appendChild(toMain)
+      }
+   })
    const art = document.querySelectorAll('article');
    let maxIdObj = 0;
    if (art.length - 1 != 0) {
@@ -688,7 +845,10 @@ addEventListener('beforeunload', function () {
    } else {
       maxIdObj = (Number(art[0].id) + 1);
    }
-   const articles = document.querySelectorAll('.main__container');
+
+   // Збереження ще не виконаних стикерів
+
+   const articles = document.querySelectorAll(`.main__container`);
    const articlesData = [];
    articles.forEach(function (article) {
       const articleData = {
@@ -696,10 +856,24 @@ addEventListener('beforeunload', function () {
       };
       articlesData.push(articleData);
    });
+
+   // Збереження виконаних стикерів
+
+   const articlesSave = document.querySelectorAll(`.footer__container`);
+   const articlesDataSave = [];
+   articlesSave.forEach(function (article) {
+      const articleDataSave = {
+         htmlContent: article.innerHTML,
+      };
+      articlesDataSave.push(articleDataSave);
+   });
+
    if (document.querySelectorAll('article').length) {
       localStorage.setItem('articlesData', JSON.stringify(articlesData));
+      localStorage.setItem('articlesDataSave', JSON.stringify(articlesDataSave));
    } else {
       localStorage.setItem('articlesData', '');
+      localStorage.setItem('articlesDataSave', '');
    }
    localStorage.setItem('id', maxIdObj.toString());
    localStorage.setItem('idList', idList.toString());
@@ -722,5 +896,18 @@ searchElement.addEventListener('input', function (e) {
             text[i].parentNode.parentNode.classList.remove('search')
          }
       }
+   }
+})
+
+document.addEventListener('mousedown', function (e) {
+   clearSelection();
+   currentElementSearch(e)
+});
+
+document.addEventListener('touchstart', function (e) {
+   clearSelection();
+   currentElementSearch(e)
+   if (e.targetTouches[0].target.parentNode.classList.contains('del')) {
+      del();
    }
 })
