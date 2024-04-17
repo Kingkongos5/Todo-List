@@ -193,6 +193,7 @@ label.checked span:before {
   gap: 15px;
   position: relative;
   min-height: 100vh;
+  background: url(../img/5497934.jpg) 0 0;
 }
 .main__container.zIndex {
   z-index: 0;
