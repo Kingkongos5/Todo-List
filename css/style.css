@@ -139,7 +139,6 @@ body {
 
 .wrapper {
   position: relative;
-  background: url(../img/5497934.jpg) 0 0;
 }
 
 * {
@@ -151,6 +150,7 @@ body {
   overflow: hidden;
   background: rgba(109, 219, 111);
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  background: url(../img/5497934.jpg) 0 0;
 }
 
 ::-webkit-scrollbar {
@@ -193,7 +193,6 @@ label.checked span:before {
   gap: 15px;
   position: relative;
   min-height: 100vh;
-  background: url(../img/5497934.jpg) 0 0;
 }
 .main__container.zIndex {
   z-index: 0;
